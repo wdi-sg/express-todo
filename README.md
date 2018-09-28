@@ -1,6 +1,6 @@
 # express-todo
 
-![https://media.giphy.com/media/xTiTnuhyBF54B852nK/giphy.gif](https://media.giphy.com/media/xTiTnuhyBF54B852nK/giphy.gif)
+![https://i.giphy.com/media/xTiTnuhyBF54B852nK/giphy.webp](https://i.giphy.com/media/xTiTnuhyBF54B852nK/giphy.webp)
 
 Create a todo list app for yourself.
 
