@@ -1,5 +1,7 @@
 # express-todo
 
+![https://media.giphy.com/media/xTiTnuhyBF54B852nK/giphy.gif](https://media.giphy.com/media/xTiTnuhyBF54B852nK/giphy.gif)
+
 Create a todo list app for yourself.
 
 Use express, jsonfile and react templates as we have been doing during the week.
