@@ -1,0 +1,25 @@
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.blue-box {
+  background-color: rgb(0,40,80);
+  color: white;
+}
+
+header, main, footer {
+  width: 60%;
+  margin: 0 auto;
+  padding: 1vh 0;
+  justify-content: center;
+}
+
+header, footer {
+  background-color: rgb(0,40,80);
+  color: white;
+}
+
+h1 {
+  font-size: 60px;
+  text-transform: uppercase;
+}
