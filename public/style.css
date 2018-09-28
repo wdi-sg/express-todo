@@ -1,25 +1,25 @@
 body {
-  font-family: "Noto Sans", sans-serif;
+  background-color: green;
 }
 
-.blue-box {
-  background-color: rgb(0,40,80);
-  color: white;
+.container {
+  width: 80vw;
+  background-color: white;
+  padding: 3vh 3vw;
+  border-radius: 7px;
+  margin: 2vh auto;
 }
 
-header, main, footer {
-  width: 60%;
-  margin: 0 auto;
-  padding: 1vh 0;
-  justify-content: center;
+.row {
+  margin: 2vh auto;
 }
 
-header, footer {
-  background-color: rgb(0,40,80);
-  color: white;
+.group {
+  background-color: rgb(0,0,0,0.1);
+  border: 1px solid grey;
+  border-radius: 7px;
 }
 
-h1 {
-  font-size: 60px;
-  text-transform: uppercase;
+.date-text {
+  float: right;
 }
