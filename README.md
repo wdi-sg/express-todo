@@ -36,7 +36,7 @@ If you want you can choose to make a shopping list app instead.
 Add a recording of the time that you put the item in your todo list.
 
 ## further
-Add a recording of the time that you marked the item done.
+Don't allow the user to make a todo item that is empty. (Or below a minimum number of characters)
 
 ## further
 Add a recording of the time that you marked the item done.
@@ -49,3 +49,6 @@ Add "buckets" or categories that you can put each of your todo items into.
 
 ## further
 Add the ability to name each bucket/category.
+
+## further
+Add the ability to sort the buckets by date or name
