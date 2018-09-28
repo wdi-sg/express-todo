@@ -20,6 +20,16 @@ app.get('/tasks/new', (req, res) => {
   res.render('NewTask');
 });
 
+app.get('/tasks', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.render('Tasks', { tasks: obj.tasks });
+  });
+});
+
 app.post('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -39,7 +49,7 @@ app.post('/tasks', (req, res) => {
     });
   });
 
-  res.send('Task added');
+  res.redirect('/tasks');
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
