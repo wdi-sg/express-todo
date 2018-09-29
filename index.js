@@ -1,8 +1,9 @@
 const express = require('express');
 const jsonfile = require('jsonfile');
+const methodOverride = require('method-override');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 const FILE = 'data.json';
 
 // REACT VIEW ENGINE
@@ -17,6 +18,7 @@ app.use(
     extended: true,
   }),
 );
+app.use(methodOverride('_method'));
 
 // EXPRESS ROUTES
 
@@ -25,13 +27,40 @@ app.get('/tasks/new', (req, res) => {
   res.render('add_task');
 });
 
+app.put('/tasks/:id', (req, res) => {
+  jsonfile.readFile(FILE, (readErr, obj) => {
+    if (readErr) return console.error(readErr);
+    const list = obj.tasks;
+    const param = req.params.id;
+    // console.log(param);
+    list.forEach((element) => {
+      const updated = element;
+      if (element.id.toString() === param) {
+        updated.complete = true;
+        jsonfile.writeFile(FILE, obj, (writeErr) => {
+          if (writeErr) console.error(writeErr);
+          res.redirect('/tasks');
+        });
+      }
+    });
+  });
+});
+
 //  NEW TASK WRITE
 app.post('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
     if (readErr) return console.error(readErr);
-    const payload = obj.tasks;
+    const list = obj.tasks;
     const param = req.body.task;
-    payload.push(param);
+    const currentDate = new Date().toLocaleString();
+    const newTask = {
+      id: list.length + 1,
+      time: currentDate,
+      value: param,
+      complete: false,
+      hidden: false,
+    };
+    list.push(newTask);
     return jsonfile.writeFile(FILE, obj, (writeErr) => {
       if (writeErr) console.error(writeErr);
       return res.render('post_task', { task: param });
@@ -42,7 +71,7 @@ app.post('/tasks', (req, res) => {
 app.get('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
     if (readErr) return console.error(readErr);
-    res.render('tasks', obj);
+    return res.render('tasks', { tasks: obj.tasks });
   });
 });
 

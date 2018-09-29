@@ -6,7 +6,7 @@ class AddTask extends React.Component {
     console.log('Please ignore for eslint, ', typeof this.props);
     return (
       <DefaultLayout title="Add Task" subtitle="Add new task.">
-        <form action="/tasks" method="post">
+        <form action="/tasks" method="post" autocomplete="off">
           <div className="form-group">
             <input
               type="text"
