@@ -15,10 +15,10 @@ class Layout extends React.Component {
         <body>
           <div className="container">
             <header className="row">
-              <div class="col">
-                <h1>Shopping List</h1>
+              <div className="col">
+                <h1>List</h1>
                 <nav>
-                  <a href="/new">Add</a>
+                  <a href="/">Main</a>|<a href="/new">Add</a>
                 </nav>
               </div>
             </header>

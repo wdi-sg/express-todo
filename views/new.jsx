@@ -1,6 +1,20 @@
 var React = require('react');
 var Layout = require('./layout/layout');
 
+class SelectGroups extends React.Component {
+
+  render () {
+
+    let selectGroups = this.props.data.map (group => {
+      return (
+        <option value={group.label}>{group.label}</option>
+      )
+    })
+
+      return selectGroups;
+  }
+}
+
 class Home extends React.Component {
 
   render () {
@@ -14,11 +28,7 @@ class Home extends React.Component {
               <input className="form-control" name ="newGroup" />
               <small className="form-text text-muted">Leave blank for none, or select an existing group:</small>
               <select className="form-control" name="groupSelect">
-                <option value = ""></option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <SelectGroups data={this.props.data} />
               </select>
               <label>Item:</label>
               <textarea class="form-control"rows="3" name="itemBody"></textarea>

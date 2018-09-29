@@ -20,45 +20,23 @@ class ListItems extends React.Component {
   }
 }
 
-class ListGroups extends React.Component {
+class Home extends React.Component {
 
   render () {
 
     let listGroups = this.props.data.map (group => {
 
-      if (group.label === "unlabelled") {
-
-        return (
-          <div className="col-sm">
-            <p></p>
-           <ListItems items={group.items} />
-           </div>
-         )
-
-
-      } else {
-
-        return (
-          <div className="col-sm group">
-            <p>{group.label}<span className="date-text text-muted">{group.date_time}</span></p>
-            <ListItems items={group.items} />
-          </div>
-        )
-      }
-
+      return (
+        <div className="col-md">
+          <p>{group.label}<span className="date-text text-muted">{group.date_time}</span></p>
+          <ListItems items={group.items} />
+        </div>
+      )
     })
-
-    return listGroups
-  }
-}
-
-class Home extends React.Component {
-
-  render () {
 
     return (
       <Layout title="Shopping List">
-        <ListGroups data={this.props.data} />
+        {listGroups}
       </Layout>
     )
   }

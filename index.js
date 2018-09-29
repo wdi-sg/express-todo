@@ -17,7 +17,6 @@ app.engine('jsx', reactEngine);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 
-
 const FILE = 'data.json';
 
 // add stuff to list
@@ -26,7 +25,6 @@ app.post('/new', (req, res) => {
   let newGroup = req.body.newGroup;
   let groupSelect = req.body.groupSelect;
   let itemBody = req.body.itemBody;
-
 
   jsonfile.readFile(FILE, (err, obj) => {
 
@@ -50,17 +48,26 @@ app.post('/new', (req, res) => {
 
       if (alreadyExists === false) {
 
+        let date = new Date();
+
+        let time = date.getHours() + ":" + date.getMinutes();
+
         let newGroupObj = {};
         newGroupObj["label"] = newGroup;
-        newGroupObj["date_time"] = ""; // FIX THIS LATER
+        newGroupObj["date_time"] = time;
         newGroupObj["items"] = [];
         newGroupObj["items"].push(itemBody);
 
         updated.data.push(newGroupObj);
       }
-    }
+    } else if (groupSelect) {
 
-    // refactor this!!!
+      for (let i in obj.data) {
+        if (newGroup === obj.data[i].label) {
+          updated.data[i].items.push(itemBody);
+        }
+      }
+    }
 
     if (itemBody === "") {
       res.redirect("/");
@@ -96,19 +103,3 @@ app.get ("/", (req, res) => {
 const PORT = 3000;
 app.listen(PORT);
 console.log("Listening on port: " + PORT);
-
-// clicking once checks an item
-// clicking again removes the item
-
-// unsorted items
-// - a
-// - b
-// - c
-// category 1
-// - a
-// - b
-// - c
-// cat 2
-// - a
-// - b
-// - c
