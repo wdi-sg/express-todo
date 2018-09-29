@@ -59,7 +59,7 @@ app.get('/tasks/new', (req, res) => {
       console.log(err);
     }
 
-    res.render('NewTask', { categories: obj.categories });
+    res.render('TaskNew', { categories: obj.categories });
   });
 });
 
@@ -71,6 +71,10 @@ app.get('/tasks', (req, res) => {
 
     res.render('Tasks', { tasks: obj.tasks });
   });
+});
+
+app.get('/categories/:name/edit', (req, res) => {
+  res.render('CategoryEdit', { category: req.params.name });
 });
 
 app.get('/categories', (req, res) => {
@@ -134,6 +138,34 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
+app.put('/categories/:name', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    const categoryIndex = obj.categories.findIndex(category => {
+      return category === req.params.name;
+    });
+
+    //TODO: input validation
+    obj.categories[categoryIndex] = req.body.category;
+
+    const tasks = obj.tasks.filter(task => task.category === req.params.name);
+    tasks.forEach(task => {
+      task.category = req.body.category;
+    });
+
+    jsonfile.writeFile(FILE, obj, err => {
+      if (err) {
+        console.log(err);
+      }
+
+      res.redirect('/categories');
+    });
+  });
+});
+
 app.delete('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -144,7 +176,7 @@ app.delete('/tasks/:id', (req, res) => {
     const taskIndex = obj.tasks.findIndex(task => task.id === taskId);
     obj.tasks.splice(taskIndex, 1);
 
-    jsonfile.writeFile(FILE, obj, (err) => {
+    jsonfile.writeFile(FILE, obj, err => {
       if (err) {
         console.log(err);
       }
@@ -153,5 +185,7 @@ app.delete('/tasks/:id', (req, res) => {
     });
   });
 });
+
+//TODO: delete category
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

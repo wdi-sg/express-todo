@@ -3,7 +3,7 @@ import Layout from './Layout';
 import FormText from './FormText';
 import FormCategory from './FormCategory';
 
-class NewTask extends React.Component {
+class TaskNew extends React.Component {
   render() {
     return (
       <Layout>
@@ -29,4 +29,4 @@ class NewTask extends React.Component {
   }
 }
 
-export default NewTask;
+export default TaskNew;

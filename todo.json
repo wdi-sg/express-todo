@@ -1,1 +1,16 @@
-{"categories":["Inbox","Shopping"],"tasks":[{"id":2,"name":"Do assignment","category":"Inbox","status":"active","timeAdded":"2018/09/29 19:54:34","timeDone":"null"}]}
+{
+  "categories": [
+    "Inbox",
+    "Shopping"
+  ],
+  "tasks": [
+    {
+      "id": 2,
+      "name": "Do assignment",
+      "category": "Inbox",
+      "status": "active",
+      "timeAdded": "2018/09/29 19:54:34",
+      "timeDone": "null"
+    }
+  ]
+}
