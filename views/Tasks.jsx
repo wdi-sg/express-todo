@@ -14,7 +14,7 @@ class Tasks extends React.Component {
 
     return (
       <Layout>
-        <div>
+        <div className="container">
           <h1 className="text-center">Tasks</h1>
           <main>
             <div className="container">

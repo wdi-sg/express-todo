@@ -18,7 +18,15 @@ app.use(express.urlencoded({
 }));
 
 app.get('/tasks/:id/edit', (req, res) => {
-  res.send('Edit');
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    const taskId = parseInt(req.params.id);
+    const task = obj.tasks.find(task => task.id === taskId);
+    res.render('TaskEdit', { task: task });
+  });
 });
 
 app.get('/tasks/new', (req, res) => {
@@ -68,7 +76,10 @@ app.put('/tasks/:id', (req, res) => {
 
     const taskId = parseInt(req.params.id);
     const task = obj.tasks.find(task => task.id === taskId);
-    task.status = task.status === 'active' ? 'done' : 'active';
+    task.name = req.body.name;
+    if (req.body.toggle) {
+      task.status = task.status === 'active' ? 'done' : 'active';
+    }
 
     jsonfile.writeFile(FILE, obj, err => {
       if (err) {

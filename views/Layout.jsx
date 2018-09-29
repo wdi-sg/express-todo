@@ -13,9 +13,7 @@ class Layout extends React.Component {
           <title>Tasks</title>
         </head>
         <body>
-          <div className="container">
-            {this.props.children}
-          </div>
+          {this.props.children}
         </body>
       </html>
     );
