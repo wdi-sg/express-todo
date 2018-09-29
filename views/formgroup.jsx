@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 class FormGroup extends React.Component {
   render() {
+{/*Had to add this to Reset the form otherwise there would be a error sometimes where the form could not submit repeatedly.*/}
     const cancelCourse = () => {
       document.getElementById("listItemEntry").reset();
     };
@@ -19,7 +20,7 @@ class FormGroup extends React.Component {
               className="form-control"
               id="listItemEntry"
               name="newToDoItem"
-              placeholder="Enter your List Item..."
+              placeholder="What do you want to do?"
             />
           </div>
           <div className="col-md-2 d-inline-block clearfix">

@@ -37,6 +37,7 @@ app.set("view engine", "jsx");
 app.get("/", (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) return console.error(err);
+// Pass the object from json.readfile to Index.jsx on render
     res.render("index", obj);
   });
 });
@@ -44,12 +45,15 @@ app.get("/", (req, res) => {
 app.post("/newpost", (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) return console.error(err);
-    const toDoListItems = obj.toDoItems;
-    const newItem = req.body.newToDoItem;
+    const toDoListItems = obj.toDoItems
+    let newItem = {
+        "todo" : req.body.newToDoItem,
+        "date" : Intl.DateTimeFormat('en-GB').format(Date.now())
+    }
     toDoListItems.push(newItem);
     return jsonfile.writeFile(FILE, obj, (err) => {
       if (err) return console.error(err);
-      res.render("newpost", {newItem: newItem});
+      res.render("newpost", {newItem: newItem.todo});
     });
   });
 });

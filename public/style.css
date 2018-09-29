@@ -1,3 +1,7 @@
 .container-fluid {
 	padding: 10px;
 }
+
+li {
+	word-wrap: break-word;
+}
