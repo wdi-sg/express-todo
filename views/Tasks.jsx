@@ -8,7 +8,12 @@ class Tasks extends React.Component {
       <Layout>
         <main>
           <div className="text-center">
-            <a href="/tasks/new" className="btn btn-outline-primary">New Task</a>
+            <a
+              href="/tasks/new"
+              className="btn btn-outline-primary"
+            >
+              + New Task
+            </a>
           </div>
           <TaskList title="To Do" tasks={this.props.todo} />
           <TaskList title="Done" tasks={this.props.done} />
