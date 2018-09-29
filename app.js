@@ -117,4 +117,24 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
+app.delete('/tasks/:id', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    const taskId = parseInt(req.params.id);
+    const taskIndex = obj.tasks.findIndex(task => task.id === taskId);
+    obj.tasks.splice(taskIndex, 1);
+
+    jsonfile.writeFile(FILE, obj, (err) => {
+      if (err) {
+        console.log(err);
+      }
+
+      res.redirect('/tasks');
+    });
+  });
+});
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
