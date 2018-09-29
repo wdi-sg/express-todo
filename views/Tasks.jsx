@@ -4,17 +4,24 @@ import TaskItem from './TaskItem';
 
 class Tasks extends React.Component {
   render() {
-    const tasks = this.props.tasks.map(task => {
-      return <TaskItem key={task.id} name={task.name} />;
+    const todo = this.props.todo.map(task => {
+      return <TaskItem key={task.id} task={task} />;
+    });
+
+    const done = this.props.done.map(task => {
+      return <TaskItem key={task.id} task={task} />;
     });
 
     return (
       <Layout>
         <div>
           <h1>Tasks</h1>
-          <ul>
-            {tasks}
-          </ul>
+          <main>
+            <h3>To Do</h3>
+            {todo}
+            <h3>Done</h3>
+            {done}
+          </main>
         </div>
       </Layout>
     );

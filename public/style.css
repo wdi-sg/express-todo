@@ -1,0 +1,7 @@
+.task {
+  outline: none;
+}
+
+.task--done {
+  text-decoration: line-through;
+}
