@@ -6,6 +6,20 @@ const reactEngine = require('express-react-views').createEngine();
 const PORT = 3000;
 const FILE = 'todo.json';
 
+const getDateTime = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  month = (month < 10 ? '0' : '') + month;
+  let day = date.getDate();
+  day = (day < 10 ? '0' : '') + day;
+  let hour = date.getHours();
+  hour = (hour < 10 ? '0' : '') + hour;
+  let minute = date.getMinutes();
+  minute = (minute < 10 ? '0' : '') + minute;
+  return year + '/' + month + '/' + day + ' ' + hour + ':' + minute;
+}
+
 app = express();
 app.engine('jsx', reactEngine);
 app.set('views', __dirname + '/views');
@@ -54,7 +68,8 @@ app.post('/tasks', (req, res) => {
     const newTask = {
       id: obj.tasks.length + 1,
       name: req.body.name.trim(),
-      status: 'active'
+      status: 'active',
+      timeAdded: getDateTime()
     };
 
     obj.tasks.push(newTask);
