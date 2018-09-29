@@ -7,17 +7,30 @@ class ListItems extends React.Component {
 
     let listItems = this.props.items.map (item => {
 
-      return (
-        <li>
-          {item.text}
-          <form method="POST" action="/?_method=PUT">
-            <input type="hidden" name="group" value={this.props.group.label} />
-            <input type="hidden" name="item" value={item} />
-            <input type="submit" className="btn btn-outline-secondary btn-sm date-text"
-              name="content" value="Done" />
-          </form>
+      if (item.completion > 0) {
+        return (
+          <li>
+            <span className="done-item">{item.text}</span> &ndash; <span className="text-muted">{item.time}</span>
+            <form method="POST" action="/?_method=PUT">
+              <input type="hidden" name="group" value={this.props.group.label} />
+              <input type="hidden" name="item" value={item.text} />
+              <input type="submit" className="btn btn-sm date-text" value="Remove" />
+            </form>
+          </li>
+        )
+      } else {
+        return (
+          <li>
+            {item.text} &ndash; <span className="text-muted">{item.time}</span>
+            <form method="POST" action="/?_method=PUT">
+              <input type="hidden" name="group" value={this.props.group.label} />
+              <input type="hidden" name="item" value={item.text} />
+              <input type="submit" className="btn btn-sm date-text" value="Done" />
+            </form>
         </li>
-      )
+        )
+      }
+
     })
 
     return (

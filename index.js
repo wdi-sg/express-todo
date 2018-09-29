@@ -39,7 +39,7 @@ app.post('/new', (req, res) => {
 
 
     if (!newGroup && !groupSelect) {
-      updated.data[0].push(newItem);
+      updated.data[0].items.push(newItem);
     }
 
     if (newGroup) {
@@ -99,13 +99,37 @@ app.get("/new", (req, res) => {
 
 app.put("/", (req, res) => {
 
-  console.log(req.body);
+  let group = req.body.group;
+  let item = req.body.item;
 
   jsonfile.readFile(FILE, (err, obj) => {
-    if (err) console.log(err);
 
-    // when its done should redirect to main page
-    res.redirect("/");
+    let updated = obj;
+
+    for (let i in updated.data) {
+      if (updated.data[i].label === group) {
+        for (let y in updated.data[i].items) {
+          if (updated.data[i].items[y].text === item) {
+            updated.data[i].items[y].completion++;
+             if (updated.data[i].items[y].completion >= 2) {
+               updated.data[i].items.splice(y, 1);
+               updated.data[i].count--;
+               if (updated.data[i].count <= 0 && i > 0) {
+                 updated.data.splice(i, 1);
+               }
+             }
+             break;
+          }
+          break;
+        }
+      }
+    }
+
+    jsonfile.writeFile(FILE, updated, (err) => {
+      if (err) console.log(err);
+
+      res.redirect("/");
+    })
   })
 })
 

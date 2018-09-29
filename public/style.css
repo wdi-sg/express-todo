@@ -27,3 +27,8 @@ body {
 .hide-button {
   float: right;
 }
+
+.done-item {
+  text-decoration: line-through;
+  color: grey;
+}
