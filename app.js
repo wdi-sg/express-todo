@@ -48,12 +48,19 @@ app.get('/tasks/:id/edit', (req, res) => {
 
     const taskId = parseInt(req.params.id);
     const task = obj.tasks.find(task => task.id === taskId);
-    res.render('TaskEdit', { task: task });
+    const categories = obj.categories;
+    res.render('TaskEdit', { task: task, categories: categories });
   });
 });
 
 app.get('/tasks/new', (req, res) => {
-  res.render('NewTask');
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.render('NewTask', { categories: obj.categories });
+  });
 });
 
 app.get('/tasks', (req, res) => {
@@ -76,7 +83,8 @@ app.post('/tasks', (req, res) => {
 
     const newTask = {
       id: obj.tasks.length + 1,
-      name: req.body.name.trim(),
+      name: req.body.task.trim(),
+      category: req.body.category,
       status: 'active',
       timeAdded: getDateTime(),
       timeDone: 'null'
@@ -101,7 +109,8 @@ app.put('/tasks/:id', (req, res) => {
 
     const taskId = parseInt(req.params.id);
     const task = obj.tasks.find(task => task.id === taskId);
-    task.name = req.body.name;
+    task.name = req.body.task;
+    task.category = req.body.category;
     if (req.body.toggle) {
       task.timeDone = task.status === 'active' ? getDateTime() : 'null';
       task.status = task.status === 'active' ? 'done' : 'active';
