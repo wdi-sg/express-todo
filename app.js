@@ -17,6 +17,10 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+app.get('/tasks/:id/edit', (req, res) => {
+  res.send('Edit');
+});
+
 app.get('/tasks/new', (req, res) => {
   res.render('NewTask');
 });

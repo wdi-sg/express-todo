@@ -15,12 +15,21 @@ class Tasks extends React.Component {
     return (
       <Layout>
         <div>
-          <h1>Tasks</h1>
+          <h1 className="text-center">Tasks</h1>
           <main>
-            <h3>To Do</h3>
-            {todo}
-            <h3>Done</h3>
-            {done}
+            <div className="container">
+              <p className="text-right">To Do</p>
+              <ul className="list-group list-group-flush">
+                {todo}
+              </ul>
+            </div>
+
+            <div className="container">
+              <p className="text-right">Done</p>
+              <ul className="list-group list-group-flush">
+                {done}
+              </ul>
+            </div>
           </main>
         </div>
       </Layout>
