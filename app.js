@@ -8,16 +8,25 @@ const FILE = 'todo.json';
 
 const getDateTime = () => {
   const date = new Date();
+
   const year = date.getFullYear();
+
   let month = date.getMonth() + 1;
   month = (month < 10 ? '0' : '') + month;
+
   let day = date.getDate();
   day = (day < 10 ? '0' : '') + day;
+
   let hour = date.getHours();
   hour = (hour < 10 ? '0' : '') + hour;
-  let minute = date.getMinutes();
-  minute = (minute < 10 ? '0' : '') + minute;
-  return year + '/' + month + '/' + day + ' ' + hour + ':' + minute;
+
+  let min = date.getMinutes();
+  min = (min < 10 ? '0' : '') + min;
+
+  let sec = date.getSeconds();
+  sec = (sec < 10 ? '0' : '') + sec;
+
+  return year + '/' + month + '/' + day + ' ' + hour + ':' + min + ':' + sec;
 }
 
 app = express();
@@ -69,7 +78,8 @@ app.post('/tasks', (req, res) => {
       id: obj.tasks.length + 1,
       name: req.body.name.trim(),
       status: 'active',
-      timeAdded: getDateTime()
+      timeAdded: getDateTime(),
+      timeDone: 'null'
     };
 
     obj.tasks.push(newTask);
@@ -93,6 +103,7 @@ app.put('/tasks/:id', (req, res) => {
     const task = obj.tasks.find(task => task.id === taskId);
     task.name = req.body.name;
     if (req.body.toggle) {
+      task.timeDone = task.status === 'active' ? getDateTime() : 'null';
       task.status = task.status === 'active' ? 'done' : 'active';
     }
 
