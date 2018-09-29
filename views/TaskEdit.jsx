@@ -8,7 +8,6 @@ class TaskEdit extends React.Component {
     const toggleText = this.props.task.status === 'active' ? 'Done' : 'Undo';
     return (
       <Layout>
-        <h1 className="text-center">Edit Task</h1>
         <form method="POST">
           <div className="input-group">
             <input

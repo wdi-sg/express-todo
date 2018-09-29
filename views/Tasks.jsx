@@ -14,8 +14,11 @@ class Tasks extends React.Component {
 
     return (
       <Layout>
-        <h1 className="text-center">Tasks</h1>
         <main>
+          <div className="text-center">
+            <a href="/tasks/new" className="btn btn-outline-primary">New Task</a>
+          </div>
+
           <div className="container">
             <p className="text-right">To Do</p>
             <ul className="list-group list-group-flush">
