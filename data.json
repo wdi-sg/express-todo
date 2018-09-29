@@ -1,1 +1,1 @@
-{"data":[{"label":"","date_time":"","items":["Fix my phone"]},{"label":"Vegetables","date_time":"14:49","items":["3 apples\r\n4 bananas","2 watermelons"]},{"label":"Things todo","date_time":"15:10","items":["12345"]}]}
+{"data":[{"label":"","count":1,"items":[{"text":"Test item","time":"","completion":0}]},{"label":"Vegetables","count":1,"items":[{"text":"celery","time":"16:52","completion":0},{"text":"bananas","time":"16:52","completion":0}]}]}

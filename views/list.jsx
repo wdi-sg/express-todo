@@ -8,7 +8,15 @@ class ListItems extends React.Component {
     let listItems = this.props.items.map (item => {
 
       return (
-        <li>{item}</li>
+        <li>
+          {item.text}
+          <form method="POST" action="/?_method=PUT">
+            <input type="hidden" name="group" value={this.props.group.label} />
+            <input type="hidden" name="item" value={item} />
+            <input type="submit" className="btn btn-outline-secondary btn-sm date-text"
+              name="content" value="Done" />
+          </form>
+        </li>
       )
     })
 
@@ -28,8 +36,8 @@ class Home extends React.Component {
 
       return (
         <div className="col-md">
-          <p>{group.label}<span className="date-text text-muted">{group.date_time}</span></p>
-          <ListItems items={group.items} />
+          <p>{group.label}</p>
+          <ListItems items={group.items} group={group} />
         </div>
       )
     })

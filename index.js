@@ -19,7 +19,7 @@ app.set('view engine', 'jsx');
 
 const FILE = 'data.json';
 
-// add stuff to list
+// REWRITE THIS TO ACOMMODATE NEW DATA FORMAT
 app.post('/new', (req, res) => {
 
   let newGroup = req.body.newGroup;
@@ -30,8 +30,16 @@ app.post('/new', (req, res) => {
 
     let updated = obj;
 
+    let date = new Date();
+
+    let newItem = {};
+    newItem["text"] = itemBody;
+    newItem["time"] = date.getHours() + ":" + date.getMinutes();
+    newItem["completion"] = 0;
+
+
     if (!newGroup && !groupSelect) {
-      updated.data[0].items.push(itemBody);
+      updated.data[0].push(newItem);
     }
 
     if (newGroup) {
@@ -40,7 +48,7 @@ app.post('/new', (req, res) => {
 
       for (let i in obj.data) {
         if (newGroup.toLowerCase() === obj.data[i].label.toLowerCase()) {
-          updated.data[i].items.push(itemBody);
+          updated.data[i].items.push(newItem);
           alreadyExists = true;
           break;
         }
@@ -48,23 +56,20 @@ app.post('/new', (req, res) => {
 
       if (alreadyExists === false) {
 
-        let date = new Date();
-
-        let time = date.getHours() + ":" + date.getMinutes();
-
         let newGroupObj = {};
         newGroupObj["label"] = newGroup;
-        newGroupObj["date_time"] = time;
+        newGroupObj["count"] = 1;
         newGroupObj["items"] = [];
-        newGroupObj["items"].push(itemBody);
+        newGroupObj["items"].push(newItem);
 
         updated.data.push(newGroupObj);
       }
     } else if (groupSelect) {
 
       for (let i in obj.data) {
-        if (newGroup === obj.data[i].label) {
-          updated.data[i].items.push(itemBody);
+        if (groupSelect === obj.data[i].label) {
+          updated.data[i].items.push(newItem);
+          break;
         }
       }
     }
@@ -83,18 +88,32 @@ app.post('/new', (req, res) => {
 })
 
 // new item form
-app.get ("/new", (req, res) => {
+app.get("/new", (req, res) => {
 
   jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.log(err);
 
     res.render("new", {data: obj.data});
   })
 })
 
-// list stuff
-app.get ("/", (req, res) => {
+app.put("/", (req, res) => {
+
+  console.log(req.body);
 
   jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.log(err);
+
+    // when its done should redirect to main page
+    res.redirect("/");
+  })
+})
+
+// list stuff
+app.get("/", (req, res) => {
+
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.log(err);
 
     res.render("list", {data: obj.data});
   })
