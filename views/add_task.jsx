@@ -3,9 +3,9 @@ const DefaultLayout = require('./layouts/default');
 
 class AddTask extends React.Component {
   render() {
-    console.log('eslint corrector', typeof this.props);
+    console.log('Please ignore: eslint corrector', typeof this.props);
     return (
-      <DefaultLayout title="Add Task">
+      <DefaultLayout title="Add Task" subtitle="Add new task.">
         <form action="/tasks" method="post">
           <div className="form-group">
             <input

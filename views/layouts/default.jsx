@@ -19,7 +19,7 @@ class DefaultLayout extends React.Component {
               <a className="navbar-brand text-center" href="/">
                 ToDo
               </a>
-              <span className="navbar-text">Add new task.</span>
+              <span className="navbar-text">{this.props.subtitle}</span>
             </nav>
           </header>
           <div className="container w-50 mx-auto mt-5">{this.props.children}</div>
