@@ -69,9 +69,17 @@ app.get('/tasks', (req, res) => {
       console.log(err);
     }
 
-    const todo = obj.tasks.filter(task => task.status === 'active');
-    const done = obj.tasks.filter(task => task.status === 'done');
-    res.render('Tasks', { todo: todo, done: done });
+    res.render('Tasks', { tasks: obj.tasks });
+  });
+});
+
+app.get('/categories', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.render('Categories', { categories: obj.categories });
   });
 });
 

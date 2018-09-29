@@ -6,10 +6,10 @@ class Navigation extends React.Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <a href="/tasks" className="nav-link active">Tasks</a>
+            <a href="/tasks" className="nav-link">Tasks</a>
           </li>
           <li className="nav-item">
-            <a href="/categories" className="nav-link">categories</a>
+            <a href="/categories" className="nav-link">Categories</a>
           </li>
         </ul>
         <a href="/tasks/new" className="btn btn-outline-primary">+ New Task</a>
