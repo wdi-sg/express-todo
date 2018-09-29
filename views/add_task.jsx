@@ -3,7 +3,7 @@ const DefaultLayout = require('./layouts/default');
 
 class AddTask extends React.Component {
   render() {
-    console.log('Please ignore: eslint corrector', typeof this.props);
+    console.log('Please ignore for eslint, ', typeof this.props);
     return (
       <DefaultLayout title="Add Task" subtitle="Add new task.">
         <form action="/tasks" method="post">
@@ -17,7 +17,7 @@ class AddTask extends React.Component {
               required
             />
           </div>
-          <button className="btn btn-primary mt-2 float-right">Submit</button>
+          <button className="btn btn-secondary btn-block mt-2 font-weight-bold">Submit</button>
         </form>
       </DefaultLayout>
     );

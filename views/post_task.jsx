@@ -9,6 +9,13 @@ class PostTask extends React.Component {
           <h4 className="alert-heading">Get working!</h4>
           <p>{this.props.task} was added sucessfully.</p>
         </div>
+        <a
+          className="btn btn-secondary btn-block mt-2 font-weight-bold"
+          href="/tasks"
+          role="button"
+        >
+          Back
+        </a>
       </DefaultLayout>
     );
   }

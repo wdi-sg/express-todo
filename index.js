@@ -32,10 +32,17 @@ app.post('/tasks', (req, res) => {
     const payload = obj.tasks;
     const param = req.body.task;
     payload.push(param);
-    jsonfile.writeFile(FILE, obj, (writeErr) => {
+    return jsonfile.writeFile(FILE, obj, (writeErr) => {
       if (writeErr) console.error(writeErr);
       return res.render('post_task', { task: param });
     });
+  });
+});
+
+app.get('/tasks', (req, res) => {
+  jsonfile.readFile(FILE, (readErr, obj) => {
+    if (readErr) return console.error(readErr);
+    res.render('tasks', obj);
   });
 });
 
