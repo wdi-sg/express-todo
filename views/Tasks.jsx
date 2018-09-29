@@ -14,24 +14,22 @@ class Tasks extends React.Component {
 
     return (
       <Layout>
-        <div className="container">
-          <h1 className="text-center">Tasks</h1>
-          <main>
-            <div className="container">
-              <p className="text-right">To Do</p>
-              <ul className="list-group list-group-flush">
-                {todo}
-              </ul>
-            </div>
+        <h1 className="text-center">Tasks</h1>
+        <main>
+          <div className="container">
+            <p className="text-right">To Do</p>
+            <ul className="list-group list-group-flush">
+              {todo}
+            </ul>
+          </div>
 
-            <div className="container">
-              <p className="text-right">Done</p>
-              <ul className="list-group list-group-flush">
-                {done}
-              </ul>
-            </div>
-          </main>
-        </div>
+          <div className="container">
+            <p className="text-right">Done</p>
+            <ul className="list-group list-group-flush">
+              {done}
+            </ul>
+          </div>
+        </main>
       </Layout>
     );
   }
