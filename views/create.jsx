@@ -10,17 +10,20 @@ class Create extends React.Component {
         return (
 
             <Default title="Create">
-                <form method="POST" action="/">
-                    <input type="hidden" name="id" value={index}/>
-                    <h1>Enter Your List Title:</h1>
-                    <input type="text" name="title"/>
-                    <br/>
-                    <br/>
-                    <textarea name="toBeDone" placeholder="Enter the list of things/actions seperating each list item with a period" required></textarea>
-                    <br/>
-                    <br/>
-                    <input type="submit" value="Submit"/>
-                </form>
+                <div className="wrapper">
+                    <h1>Create New List</h1>
+                    <form method="POST" action="/">
+                        <input type="hidden" name="id" value={index}/>
+                        <p className="header">Title:</p>
+                        <input className="input" autoComplete="off" type="text" name="title" minLength="3" required/>
+                        <br/>
+                        <p className="header">Enter List:</p>
+                        <textarea className="input" name="toBeDone" placeholder="Enter the list of things/actions seperating each list item with a period" required></textarea>
+                        <div className="button">
+                            <input className="create" type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                </div>
             </Default>
     )};
 };

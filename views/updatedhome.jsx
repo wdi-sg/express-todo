@@ -30,17 +30,18 @@ class List extends React.Component {
 
         }
 
-        let updateUrl = "/update/" + this.props.listIndex.title;
+        let thisPage = "/" + this.props.listIndex.title;
 
         return(
 
-            <div>
+            <a href={thisPage}>
+            <div className="list-container">
                 <h2>{this.props.listIndex.title}</h2>
                 <ol>
                     {actions}
                 </ol>
-                <a href={updateUrl}><button>Update</button></a>
             </div>
+            </a>
     )};
 };
 
@@ -56,9 +57,16 @@ class UpdatedHome extends React.Component {
         return (
 
             <Default title="To-Do List">
-                <h1>To-Do List</h1>
-                {allToDo}
-                <a href="/new"><button>Create A New To-Do List</button></a>
+                <div className="wrapper">
+                    <h1>To-Do List</h1>
+                    <div className="all-container">
+                        {allToDo}
+                    </div>
+                    <div className="button">
+                        <a href="/delete"><button className="create">Delete An Existing List</button></a>
+                        <a href="/new"><button className="create">Create A New To-Do List</button></a>
+                    </div>
+                </div>
             </Default>
 
 
