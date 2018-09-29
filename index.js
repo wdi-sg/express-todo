@@ -21,7 +21,7 @@ REACT
 const reactEngine = require('express-react-views').createEngine();
 app.engine('jsx',reactEngine);
 //show express where to look for files
-app.set('views',__dirname + 'views');
+app.set('views',__dirname + '/views');
 //set handlebars to be default view engine
 app.set('view engine', 'jsx');
 
@@ -29,7 +29,12 @@ app.set('view engine', 'jsx');
 ROUTES
 */
 
+// Get Home
+app.get('/',(req,res)=>{
+    res.render('home');
+});
+
 /*
 Listen using Nodemon
 */
-app.listen(8080, ()=> console.log('~~~~~~Tuned in to port 8080~~~~~~'));
+app.listen(3000, ()=> console.log('~~~~~~Tuned in to port 3000~~~~~~'));
