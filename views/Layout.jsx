@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from './Navigation';
 
 class Layout extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Layout extends React.Component {
           <title>Tasks</title>
         </head>
         <body>
+          <Navigation />
           <div className="container my-5">
             {this.props.children}
           </div>
