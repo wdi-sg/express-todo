@@ -4,6 +4,7 @@ import FormText from './FormText';
 
 class CategoryEdit extends React.Component {
   render() {
+    //TODO: add a delete button
     const actionUrl = '/categories/' + this.props.category + '?_method=PUT';
     return (
       <Layout>

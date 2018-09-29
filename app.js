@@ -69,7 +69,15 @@ app.get('/tasks', (req, res) => {
       console.log(err);
     }
 
-    res.render('Tasks', { tasks: obj.tasks });
+    const sortby = req.query.sortby;
+    let tasks;
+    if (sortby) {
+      tasks = obj.tasks.sort((a, b) => a[sortby].localeCompare(b[sortby]));
+    } else {
+      tasks = obj.tasks;
+    }
+
+    res.render('Tasks', { tasks: tasks });
   });
 });
 
@@ -112,6 +120,8 @@ app.post('/tasks', (req, res) => {
 
   res.redirect('/tasks');
 });
+
+//TODO: add category
 
 app.put('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
