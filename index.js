@@ -2,7 +2,7 @@ const express = require("express");
 const jsonfile = require("jsonfile");
 const reactEngine = require("express-react-views").createEngine();
 const methodOverride = require("method-override");
-
+const FILE = "./data.json";
 
 /*
  * ===================================
@@ -19,7 +19,7 @@ app.use(
 );
 app.use(methodOverride("_method"));
 // Telling Express Views to look into the public folder
-app.use('/public',express.static('public'));
+app.use("/public", express.static("public"));
 
 // this line below, sets a layout look to your express project
 app.engine("jsx", reactEngine);
@@ -34,8 +34,28 @@ app.set("view engine", "jsx");
  * Set Up Routes
  * ===================================
  */
-app.get("/", (req,res) => {
-    res.render("index")
+app.get("/", (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) return console.error(err);
+    res.render("index", obj);
+  });
+});
+
+app.post("/newpost", (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) return console.error(err);
+    const toDoListItems = obj.toDoItems;
+    const newItem = req.body.newToDoItem;
+    toDoListItems.push(newItem);
+    return jsonfile.writeFile(FILE, obj, (err) => {
+      if (err) return console.error(err);
+      res.render("newpost", {newItem: newItem});
+    });
+  });
+});
+
+app.get("/newpost", (req,res) => {
+    res.render("newpost")
 })
 
-app.listen(3000, ()=>console.log("Listening on Port 3000"));
+app.listen(3000, () => console.log("Listening on Port 3000"));

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Nav from "./navbar.jsx";
-import ListGroup from "./list.jsx";
-import FormGroup from "./forminput.jsx";
+import ListGroup from "./listgroup.jsx";
+import FormGroup from "./formgroup.jsx";
 
 class Index extends Component {
   render() {
+      const toDoListItemsProps = this.props.toDoItems
+      console.log(this.props.toDoItems)
     return (
       <html lang="en">
         <div className="container-fluid">
@@ -14,7 +16,7 @@ class Index extends Component {
             <h1>Welcome To The Do List</h1>
             <div className="col-md-4">
               <FormGroup />
-              <ListGroup />
+              <ListGroup items={toDoListItemsProps} />
             </div>
           </body>
         </div>
