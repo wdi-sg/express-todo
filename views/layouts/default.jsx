@@ -1,7 +1,7 @@
 var React = require('react');
 
 class DefaultLayout extends React.Component {
-	rende() {
+	render() {
 		return (
 			<html>
 				<head>
@@ -10,6 +10,7 @@ class DefaultLayout extends React.Component {
 					<link rel="stylesheet" type="text/css" href="/style.css"></link>
 				</head>
 				<body>
+					<div>{this.props.subtitle}</div>
 					{this.props.children}
 				</body>
 			</html>

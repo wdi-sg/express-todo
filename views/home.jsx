@@ -3,8 +3,8 @@ var DefaultLayout = require('./layouts/default');
 
 class List extends React.Component {
 	render(){
-		let lists = <li>{this.props.id} {this.props.item} {this.props.location} {this.props.timerecorded} {this.props.due}</li>
-		return ( {lists} )
+		var lists = <li>{this.props.id} {this.props.item} {this.props.location} {this.props.timerecorded} {this.props.due}</li>
+		return ( lists )
 	}
 }
 
@@ -16,7 +16,7 @@ class Home extends React.Component {
 			)
 		});
 		return(
-			<DefaultLayout title="Home page">
+			<DefaultLayout title="Home page" subtitle="Home page">
 				<div>
 					<ul>
 						{itemLists}
