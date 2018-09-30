@@ -72,14 +72,15 @@ app.get('/tasks', (req, res) => {
     }
 
     const sortby = req.query.sortby;
-    let tasks;
     if (sortby) {
-      tasks = obj.tasks.sort((a, b) => a[sortby].localeCompare(b[sortby]));
-    } else {
-      tasks = obj.tasks;
+      if (sortby === 'category') {
+        obj.tasks.sort((a, b) => a[sortby] - b[sortby]);
+      } else {
+        obj.tasks.sort((a, b) => a[sortby].localeCompare(b[sortby]));
+      }
     }
 
-    res.render('Tasks', { tasks: tasks });
+    res.render('Tasks', obj);
   });
 });
 
@@ -92,7 +93,7 @@ app.post('/tasks', (req, res) => {
     const newTask = {
       id: obj.tasks.length + 1,
       name: req.body.task.trim(),
-      category: req.body.category,
+      category: parseInt(req.body.category),
       status: 'active',
       timeAdded: getDateTime(),
       timeDone: 'null'
@@ -118,7 +119,7 @@ app.put('/tasks/:id', (req, res) => {
     const taskId = parseInt(req.params.id);
     const task = obj.tasks.find(task => task.id === taskId);
     task.name = req.body.task;
-    task.category = req.body.category;
+    task.category = parseInt(req.body.category);
     if (req.body.toggle) {
       task.timeDone = task.status === 'active' ? getDateTime() : 'null';
       task.status = task.status === 'active' ? 'done' : 'active';
@@ -160,8 +161,16 @@ app.get('/categories/new', (req, res) => {
   res.render('CategoryNew');
 });
 
-app.get('/categories/:name/edit', (req, res) => {
-  res.render('CategoryEdit', { category: req.params.name });
+app.get('/categories/:id/edit', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    const categoryId = parseInt(req.params.id);
+    const category = obj.categories.find(category => category.id === categoryId);
+    res.render('CategoryEdit', { category: category });
+  });
 });
 
 app.get('/categories', (req, res) => {
@@ -180,7 +189,12 @@ app.post('/categories', (req, res) => {
       console.log(err);
     }
 
-    obj.categories.push(req.body.category);
+    const newCategory = {
+      id: obj.categories.length + 1,
+      name: req.body.category
+    };
+
+    obj.categories.push(newCategory);
 
     jsonfile.writeFile(FILE, obj, err => {
       if (err) {
@@ -192,22 +206,15 @@ app.post('/categories', (req, res) => {
   });
 });
 
-app.put('/categories/:name', (req, res) => {
+app.put('/categories/:id', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
       console.log(err);
     }
 
-    const categoryIndex = obj.categories.findIndex(category => {
-      return category === req.params.name;
-    });
-
-    obj.categories[categoryIndex] = req.body.category;
-
-    const tasks = obj.tasks.filter(task => task.category === req.params.name);
-    tasks.forEach(task => {
-      task.category = req.body.category;
-    });
+    const categoryId = parseInt(req.params.id);
+    const category = obj.categories.find(category => category.id === categoryId);
+    category.name = req.body.category;
 
     jsonfile.writeFile(FILE, obj, err => {
       if (err) {

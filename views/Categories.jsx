@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from './Layout';
-import List from './List';
+import CategoryList from './CategoryList';
 
 class Categories extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class Categories extends React.Component {
             + Add Category
           </a>
         </div>
-        <List categories={this.props.categories} />
+        <CategoryList categories={this.props.categories} />
       </Layout>
     );
   }

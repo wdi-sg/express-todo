@@ -3,10 +3,18 @@ import React from 'react';
 class FormCategory extends React.Component {
   render() {
     const categories = this.props.categories.map(category => {
-      if (category.toLowerCase() === this.props.selected) {
-        return <option key={category} value={category} selected>{category}</option>;
+      if (category.id === this.props.selected) {
+        return (
+          <option key={category.id} value={category.id} selected>
+            {category.name}
+          </option>
+        );
       }
-      return <option key={category} value={category}>{category}</option>;
+      return (
+        <option key={category.id} value={category.id}>
+          {category.name}
+        </option>
+      );
     });
 
     return (

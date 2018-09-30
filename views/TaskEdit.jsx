@@ -21,7 +21,7 @@ class TaskEdit extends React.Component {
 
           <FormCategory
             categories={this.props.categories}
-            selected={this.props.task.category.toLowerCase()}
+            selected={this.props.task.category}
           />
 
           <input

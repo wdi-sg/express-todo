@@ -4,7 +4,7 @@ import FormText from './FormText';
 
 class CategoryEdit extends React.Component {
   render() {
-    const actionUrl = '/categories/' + this.props.category + '?_method=PUT';
+    const actionUrl = '/categories/' + this.props.category.id + '?_method=PUT';
     return (
       <Layout>
         <form method="POST" action={actionUrl}>
@@ -12,7 +12,7 @@ class CategoryEdit extends React.Component {
             label="Category"
             name="category"
             placeholder=""
-            defaultValue={this.props.category}
+            defaultValue={this.props.category.name}
           />
           <input className="btn btn-primary mr-3" type="submit" value="Rename" />
           <a className="btn btn-secondary" href="/categories">Cancel</a>

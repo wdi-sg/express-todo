@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from './Layout';
-import List from './List';
+import TaskList from './TaskList';
 
 class Tasks extends React.Component {
   render() {
@@ -24,7 +24,7 @@ class Tasks extends React.Component {
             <a href="/tasks?sortby=category" className="dropdown-item">Category</a>
           </div>
         </div>
-        <List tasks={this.props.tasks} />
+        <TaskList todo={this.props} />
       </Layout>
     );
   }

@@ -8,7 +8,7 @@ class TaskItem extends React.Component {
       <a href={link} className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
         {this.props.task.name}
         <span className="badge badge-primary badge-pill">
-          {this.props.task.category}
+          {this.props.category}
         </span>
       </a>
     );
