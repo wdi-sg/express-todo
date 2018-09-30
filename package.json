@@ -1,0 +1,29 @@
+{
+  "name": "express-todo",
+  "version": "1.0.0",
+  "description": "![https://i.giphy.com/media/xTiTnuhyBF54B852nK/giphy.webp](https://i.giphy.com/media/xTiTnuhyBF54B852nK/giphy.webp)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mervyns/express-todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mervyns/express-todo/issues"
+  },
+  "homepage": "https://github.com/mervyns/express-todo#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-react-views": "^0.10.5",
+    "jsonfile": "^5.0.0",
+    "method-override": "^3.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-materialize": "^2.4.5",
+    "shortid": "^2.2.13"
+  }
+}
