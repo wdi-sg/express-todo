@@ -1,9 +1,17 @@
 var React = require('react');
 var DefaultLayout = require('./layouts/default');
+// any javsacript related stuff needs to be enclosed in {} if inside a html tag
 
 class List extends React.Component {
 	render(){
-		var lists = <li>{this.props.id} {this.props.item} {this.props.location} {this.props.timerecorded} {this.props.due}</li>
+		var actionUrl = '/'+this.props.id+'/edit'
+		var lists = 
+		<li>
+			{this.props.id} {this.props.item} {this.props.location} {this.props.timerecorded} {this.props.due} 
+			<form method="GET" action={actionUrl}>
+			<input type="submit" value="edit"/>
+			</form> 
+		</li>
 		return ( lists )
 	}
 }
@@ -16,7 +24,10 @@ class Home extends React.Component {
 			)
 		});
 		return(
-			<DefaultLayout title="Home page" subtitle="Home page">
+			<DefaultLayout title="Home page" subtitle="HOME PAGE">
+				<form method="GET" action="/new">
+					<input type="submit" value="new"/>
+				</form>
 				<div>
 					<ul>
 						{itemLists}

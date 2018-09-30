@@ -49,14 +49,73 @@ jsonfile.readFile(FILE, (err, obj) => {
 	itemsArray = obj["itemslist"];
 })
 
-app.get('/:id', (request, response)=>{
-	response.send("something");
-})
-
 //home page
-app.get('/', (request, response)=>{
-	response.render('home', { items: todolist["lists"] })
+app.get('/home', (request, response)=>{
+	jsonfile.readFile(FILE, (err, obj) => {
+		var itemArray = obj["itemslist"];
+
+		//response handler needs to be inside the json.readfile otherwise response handler will run 
+		response.render('home', { items: itemArray })
+	})
 	//console.log(itemsArray)
 })
 
-app.listen(3000);
+app.put('/:id', (request, response)=>{
+	console.log(request.body);
+	var newObj = request.body;
+	newObj.itemid = parseInt(newObj.itemid);
+	jsonfile.readFile(FILE, (err, obj)=>{
+		var itemArray = obj["itemslist"];
+		for (let i=0;i<itemArray.length;i++){
+			if(itemArray[i].itemid==newObj.itemid){
+				itemArray[i] = newObj;
+
+				jsonfile.writeFile(FILE, obj, function(err){
+					if(err) console.log("error: "+err);
+					response.send("edited");
+				})
+				break;
+			}
+		}
+
+	})
+})
+
+//edit item page
+app.get('/:id/edit', (request,response)=>{
+	console.log(request.params.id);
+	var id = request.params.id;
+	jsonfile.readFile(FILE, (err, obj) => {
+		var itemArray = obj["itemslist"];
+	
+		for (let i=0;i<itemArray.length;i++){
+			if(itemArray[i].itemid == id){
+				var newObj = itemArray[i];
+				response.render('edititems', newObj);
+			}
+		}
+	})
+})
+
+//add new item page
+app.get('/new', (request, response)=>{
+	response.render('newitems')
+})
+
+app.post('/home', (request,response)=>{
+	console.log(request.body);
+	jsonfile.readFile(FILE, (err, obj)=>{
+		const currentDate = new Date().toLocaleString();
+		var newEntry = request.body;
+		newEntry["timerecorded"]=currentDate;
+		newEntry.itemid = parseInt(newEntry.itemid);
+		var itemArray = obj['itemslist'];
+		itemArray.push(newEntry);
+		jsonfile.writeFile(FILE, obj, function(err){
+			if(err) console.log("Error: "+err);
+			response.redirect('/home');
+		})
+	})
+})
+
+app.listen(3000, () => console.log("tuning in to port 3000"));

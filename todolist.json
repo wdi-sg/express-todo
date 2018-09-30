@@ -1,17 +1,1 @@
-{
-    "itemslist": [
-    {
-        "itemid": 1,
-        "item": "eat",
-        "location": "home",
-        "timerecorded": "14:00",
-        "due": "12-01-19"
-    },
-    {
-        "itemid": 2,
-        "item": "work",
-        "location": "place",
-        "timerecorded": "15:00",
-        "due": "12-02-19"
-    }]
-}
+{"itemslist":[{"itemid":1,"item":"Play","location":"Home","due":"01-10-2018","timerecorded":"9/30/2018, 5:54:45 PM"},{"itemid":2,"item":"wenhaorocks","location":"wenhao","due":"01-10-2018","timerecorded":"9/30/2018, 5:55:28 PM"}]}
