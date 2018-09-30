@@ -9,7 +9,7 @@ class ListItems extends React.Component {
 
       if (item.completion > 0) {
         return (
-          <li>
+          <li key={item.text}>
             <span className="done-item">{item.text}</span> &ndash; <span className="text-muted">{item.time}</span>
             <form method="POST" action="/?_method=PUT">
               <input type="hidden" name="group" value={this.props.group.label} />
@@ -20,7 +20,7 @@ class ListItems extends React.Component {
         )
       } else {
         return (
-          <li>
+          <li key={item.text}>
             {item.text} &ndash; <span className="text-muted">{item.time}</span>
             <form method="POST" action="/?_method=PUT">
               <input type="hidden" name="group" value={this.props.group.label} />
@@ -41,6 +41,23 @@ class ListItems extends React.Component {
   }
 }
 
+class SortBy extends React.Component {
+
+  render () {
+
+    return (
+      <form method="GET" action="/">
+        <select name="sortBy">
+          <option value="" selected>Sort by...</option>
+          <option value="name">Name</option>
+          <option value="time">Time Created</option>
+        </select>
+        <input type="submit" className="btn btn-sm" value="Submit" />
+      </form>
+    )
+  }
+}
+
 class Home extends React.Component {
 
   render () {
@@ -48,7 +65,7 @@ class Home extends React.Component {
     let listGroups = this.props.data.map (group => {
 
       return (
-        <div className="col-md">
+        <div className="col-md group" key={group.label}>
           <p>{group.label}</p>
           <ListItems items={group.items} group={group} />
         </div>
@@ -56,8 +73,9 @@ class Home extends React.Component {
     })
 
     return (
-      <Layout title="Shopping List">
+      <Layout title="List">
         {listGroups}
+        <SortBy />
       </Layout>
     )
   }

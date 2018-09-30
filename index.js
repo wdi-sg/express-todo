@@ -19,7 +19,6 @@ app.set('view engine', 'jsx');
 
 const FILE = 'data.json';
 
-// REWRITE THIS TO ACOMMODATE NEW DATA FORMAT
 app.post('/new', (req, res) => {
 
   let newGroup = req.body.newGroup;
@@ -58,7 +57,6 @@ app.post('/new', (req, res) => {
 
         let newGroupObj = {};
         newGroupObj["label"] = newGroup;
-        newGroupObj["count"] = 1;
         newGroupObj["items"] = [];
         newGroupObj["items"].push(newItem);
 
@@ -113,8 +111,7 @@ app.put("/", (req, res) => {
             updated.data[i].items[y].completion++;
              if (updated.data[i].items[y].completion >= 2) {
                updated.data[i].items.splice(y, 1);
-               updated.data[i].count--;
-               if (updated.data[i].count <= 0 && i > 0) {
+               if (updated.data[i].items.length === 0 && i > 0) {
                  updated.data.splice(i, 1);
                }
              }
@@ -136,10 +133,39 @@ app.put("/", (req, res) => {
 // list stuff
 app.get("/", (req, res) => {
 
+  let sortBy = req.query.sortBy;
+
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) console.log(err);
 
-    res.render("list", {data: obj.data});
+    let sorted = obj.data;
+
+    if (sortBy === "name") {
+      for (let i in sorted) {
+        sorted[i].items = sorted[i].items.sort((a, b) => {
+          let nameA = a["text"];
+          let nameB = b["text"];
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        })
+      }
+    } else if (sortBy === "time") {
+      for (let i in sorted) {
+        for (let y in sorted[i].items) {
+          let minutes = sorted[i].items[y].time.split(":");
+          sorted[i].items[y]["parsedTime"] = parseInt(minutes[0])*60 + parseInt(minutes[1]);
+        }
+        sorted[i].items = sorted[i].items.sort((a, b) => {
+            return a["parsedTime"] - b["parsedTime"];
+        })
+      }
+    }
+
+    res.render("list", {data: sorted});
   })
 })
 

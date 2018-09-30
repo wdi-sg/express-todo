@@ -7,7 +7,7 @@ class SelectGroups extends React.Component {
 
     let selectGroups = this.props.data.map (group => {
       return (
-        <option value={group.label}>{group.label}</option>
+        <option value={group.label} key={group.label}>{group.label}</option>
       )
     })
 
@@ -31,7 +31,7 @@ class Home extends React.Component {
                 <SelectGroups data={this.props.data} />
               </select>
               <label>Item:</label>
-              <textarea class="form-control"rows="3" name="itemBody"></textarea>
+              <textarea className="form-control"rows="3" name="itemBody"></textarea>
             </div>
             <input type="submit" className="btn btn-success" value="Submit"/><br/>
             </form>
