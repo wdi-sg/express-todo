@@ -1,5 +1,14 @@
 const express = require('express');
-const list = 'list.json'
+const jsonfile=require('jsonfile');
+const timestamp = require('time-stamp');
+const nanoid = require('nanoid')
+const todoList = 'todolist.json'
+
+function number(){
+    for(var i = 0; i< 1000 ; i++){
+        i + 1
+    }
+}
 
 /*
 EXPRESS
@@ -29,10 +38,58 @@ app.set('view engine', 'jsx');
 ROUTES
 */
 
-// Get Home
+//GET Home
 app.get('/',(req,res)=>{
-    res.render('home');
+    jsonfile.readFile(todoList,(err,obj)=>{
+        res.render('home');
+    });
 });
+
+//POST List
+app.post('/list',(req,res) =>{
+    jsonfile.readFile (todoList , (err, obj) =>{
+        let listObject = obj['item'];
+
+        let newItem = {
+            id: nanoid(3),
+            task: req.body.task,
+            dateTime:timestamp.utc('mm:ss YYYY/MM/DD/')
+        }
+    
+        listObject.push(newItem)
+
+        jsonfile.writeFile(todoList , obj , err => {
+            console.log(err);
+            res.send(req.body)
+        })
+        res.render('new' ,{listArr: obj['item']} );
+    })
+})
+
+//Get to Edit post
+app.get('/:id/edit' ,(req,res)=>{
+    jsonfile.readFile(todoList,(err,obj)=>{
+        let listObject = obj['item']
+        let request = req.params.id
+        console.log(req.params.id)
+
+        for(i in listObject){
+            if (listObject[i].id == request){
+                var foundRequest = listObject[i]
+            }
+        }
+        if (foundRequest){
+            res.render('edit', {item:foundRequest})
+        }
+        else{
+            res.render('invalid')
+        }
+        })
+})
+
+
+
+
 
 /*
 Listen using Nodemon
