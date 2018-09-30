@@ -27,9 +27,10 @@ app.get('/tasks/new', (req, res) => {
   res.render('add_task');
 });
 
+// EDIT ROUTE TO MARK DONE
 app.put('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
-    if (readErr) return console.error(readErr);
+    if (readErr) return res.render('error', { error: JSON.stringify(readErr) });
     const list = obj.tasks;
     const param = req.params.id;
     const currentDate = new Date().toLocaleString();
@@ -39,8 +40,8 @@ app.put('/tasks/:id', (req, res) => {
         updated.complete = true;
         updated.completed = currentDate;
         jsonfile.writeFile(FILE, obj, (writeErr) => {
-          if (writeErr) console.error(writeErr);
-          res.redirect('/tasks');
+          if (writeErr) return res.render('error', { error: JSON.stringify(writeErr) });
+          return res.redirect('/tasks');
         });
       }
     });
@@ -50,17 +51,16 @@ app.put('/tasks/:id', (req, res) => {
 // DELETE TASK ROUTE
 app.delete('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
-    if (readErr) return console.error(readErr);
+    if (readErr) return res.render('error', { error: JSON.stringify(readErr) });
     const list = obj.tasks;
     const param = req.params.id;
-    // console.log(param);
     return list.forEach((element) => {
       const updated = element;
       if (element.id.toString() === param) {
         updated.hidden = true;
         jsonfile.writeFile(FILE, obj, (writeErr) => {
-          if (writeErr) console.error(writeErr);
-          res.redirect('/tasks');
+          if (writeErr) return res.render('error', { error: JSON.stringify(writeErr) });
+          return res.redirect('/tasks');
         });
       }
     });
@@ -70,7 +70,7 @@ app.delete('/tasks/:id', (req, res) => {
 //  NEW TASK WRITE
 app.post('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
-    if (readErr) return console.error(readErr);
+    if (readErr) return res.render('error', { error: JSON.stringify(readErr) });
     const list = obj.tasks;
     const param = req.body.task;
     const currentDate = new Date().toLocaleString();
@@ -84,7 +84,7 @@ app.post('/tasks', (req, res) => {
     };
     list.push(newTask);
     return jsonfile.writeFile(FILE, obj, (writeErr) => {
-      if (writeErr) console.error(writeErr);
+      if (writeErr) res.render('error', { error: JSON.stringify(writeErr) });
       return res.render('post_task', { task: param });
     });
   });
@@ -92,7 +92,7 @@ app.post('/tasks', (req, res) => {
 
 app.get('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
-    if (readErr) return console.error(readErr);
+    if (readErr) return res.render('error', { error: JSON.stringify(readErr) });
     return res.render('tasks', { tasks: obj.tasks });
   });
 });
@@ -100,7 +100,7 @@ app.get('/tasks', (req, res) => {
 // MAIN ROUTER
 app.get('/', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
-    if (readErr) return console.error(readErr);
+    if (readErr) return res.render('error', { error: JSON.stringify(readErr) });
     if (obj.tasks.length === 0) return res.redirect('/tasks/new');
     return res.redirect('/tasks');
   });
