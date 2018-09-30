@@ -2,6 +2,7 @@ const express = require('express');
 const jsonfile = require('jsonfile');
 const methodOverride = require('method-override');
 const reactEngine = require('express-react-views').createEngine();
+const uuidv1 = require('uuid/v1');
 
 const PORT = 3000;
 const FILE = 'todo.json';
@@ -48,7 +49,7 @@ app.get('/tasks/:id/edit', (req, res) => {
       console.log(err);
     }
 
-    const taskId = parseInt(req.params.id);
+    const taskId = req.params.id;
     const task = obj.tasks.find(task => task.id === taskId);
     const categories = obj.categories;
     res.render('TaskEdit', { task: task, categories: categories });
@@ -73,7 +74,7 @@ app.get('/tasks', (req, res) => {
     }
 
     const sortby = req.query.sortby;
-    const category = parseInt(req.query.category);
+    const category = req.query.category;
     let tasks;
 
     if (category) {
@@ -107,9 +108,9 @@ app.post('/tasks', (req, res) => {
     }
 
     const newTask = {
-      id: obj.tasks.length + 1,
+      id: uuidv1(),
       name: req.body.task.trim(),
-      category: parseInt(req.body.category),
+      category: req.body.category,
       status: 'active',
       timeAdded: getDateTime(),
       timeDone: 'null'
@@ -132,10 +133,10 @@ app.put('/tasks/:id', (req, res) => {
       console.log(err);
     }
 
-    const taskId = parseInt(req.params.id);
+    const taskId = req.params.id;
     const task = obj.tasks.find(task => task.id === taskId);
     task.name = req.body.task;
-    task.category = parseInt(req.body.category);
+    task.category = req.body.category;
     if (req.body.toggle) {
       task.timeDone = task.status === 'active' ? getDateTime() : 'null';
       task.status = task.status === 'active' ? 'done' : 'active';
@@ -157,7 +158,7 @@ app.delete('/tasks/:id', (req, res) => {
       console.log(err);
     }
 
-    const taskId = parseInt(req.params.id);
+    const taskId = req.params.id;
     const taskIndex = obj.tasks.findIndex(task => task.id === taskId);
     obj.tasks.splice(taskIndex, 1);
 
@@ -183,7 +184,7 @@ app.get('/categories/:id/edit', (req, res) => {
       console.log(err);
     }
 
-    const categoryId = parseInt(req.params.id);
+    const categoryId = req.params.id;
     const category = obj.categories.find(category => category.id === categoryId);
     res.render('CategoryEdit', { category: category });
   });
@@ -206,7 +207,7 @@ app.post('/categories', (req, res) => {
     }
 
     const newCategory = {
-      id: obj.categories.length + 1,
+      id: uuidv1(),
       name: req.body.category
     };
 
@@ -228,7 +229,7 @@ app.put('/categories/:id', (req, res) => {
       console.log(err);
     }
 
-    const categoryId = parseInt(req.params.id);
+    const categoryId = req.params.id;
     const category = obj.categories.find(category => category.id === categoryId);
     category.name = req.body.category;
 
