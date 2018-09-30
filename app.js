@@ -40,6 +40,8 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+// ROUTE: TASKS
+
 app.get('/tasks/:id/edit', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -81,20 +83,6 @@ app.get('/tasks', (req, res) => {
   });
 });
 
-app.get('/categories/:name/edit', (req, res) => {
-  res.render('CategoryEdit', { category: req.params.name });
-});
-
-app.get('/categories', (req, res) => {
-  jsonfile.readFile(FILE, (err, obj) => {
-    if (err) {
-      console.log(err);
-    }
-
-    res.render('Categories', { categories: obj.categories });
-  });
-});
-
 app.post('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -121,8 +109,6 @@ app.post('/tasks', (req, res) => {
   res.redirect('/tasks');
 });
 
-//TODO: add category
-
 app.put('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -148,34 +134,6 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
-app.put('/categories/:name', (req, res) => {
-  jsonfile.readFile(FILE, (err, obj) => {
-    if (err) {
-      console.log(err);
-    }
-
-    const categoryIndex = obj.categories.findIndex(category => {
-      return category === req.params.name;
-    });
-
-    //TODO: input validation
-    obj.categories[categoryIndex] = req.body.category;
-
-    const tasks = obj.tasks.filter(task => task.category === req.params.name);
-    tasks.forEach(task => {
-      task.category = req.body.category;
-    });
-
-    jsonfile.writeFile(FILE, obj, err => {
-      if (err) {
-        console.log(err);
-      }
-
-      res.redirect('/categories');
-    });
-  });
-});
-
 app.delete('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -196,6 +154,69 @@ app.delete('/tasks/:id', (req, res) => {
   });
 });
 
-//TODO: delete category
+// ROUTE: CATEGORIES
+
+app.get('/categories/new', (req, res) => {
+  res.render('CategoryNew');
+});
+
+app.get('/categories/:name/edit', (req, res) => {
+  res.render('CategoryEdit', { category: req.params.name });
+});
+
+app.get('/categories', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.render('Categories', { categories: obj.categories });
+  });
+});
+
+app.post('/categories', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    obj.categories.push(req.body.category);
+
+    jsonfile.writeFile(FILE, obj, err => {
+      if (err) {
+        console.log(err);
+      }
+
+      res.redirect('/categories');
+    });
+  });
+});
+
+app.put('/categories/:name', (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) {
+      console.log(err);
+    }
+
+    const categoryIndex = obj.categories.findIndex(category => {
+      return category === req.params.name;
+    });
+
+    obj.categories[categoryIndex] = req.body.category;
+
+    const tasks = obj.tasks.filter(task => task.category === req.params.name);
+    tasks.forEach(task => {
+      task.category = req.body.category;
+    });
+
+    jsonfile.writeFile(FILE, obj, err => {
+      if (err) {
+        console.log(err);
+      }
+
+      res.redirect('/categories');
+    });
+  });
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
