@@ -15,7 +15,22 @@ class ToDoList extends React.Component {
 
           return (
 
-            <li class={e.priority}>{e.toDoEntry}</li>
+            <div class="row">
+
+              <div class="col-xs">
+                <form action="/?_method=PUT" method="POST">
+                  <button type="submit" name="buttonEntry" value={e.toDoEntry}>{"\u2714"}</button>
+                </form>
+              </div>
+
+              <div class={"col-md " + e.completed}>
+                <li class={e.priority}>{e.toDoEntry}</li>
+              </div>
+
+              <div class="col-xs timestamp">{e.submissionTime}</div>
+
+            </div>
+
 
           )});
 
@@ -38,11 +53,43 @@ class ToDoList extends React.Component {
 
 class ToDoForm extends React.Component {
 
+  render() {
+
+    return (
+
+      <div class="new-entry-form">
+
+        <h3>To-Do List: New Entry</h3>
+
+        <form method="POST" action="/">
+
+        To-Do: <input type="text" name="toDoEntry" size="50" minLength="3" required /><br />
+
+        Priority:{"\u00a0"}
+        <input type="radio" class="priority-select" name="priority" value="high" />{"\u00a0"}High{"\u00a0"}
+        <input type="radio" class="priority-select" name="priority" value="medium" />{"\u00a0"}Medium{"\u00a0"}
+        <input type="radio" class="priority-select" name="priority" value="low" />{"\u00a0"}Low{"\u00a0"}
+        <br />
+
+        <input type="hidden" name="completed" value="notdone" /><br />
+
+        <input type="submit" value="Submit" />
+
+        </form>
+
+      </div>
+
+    );
+  };
+};
+
+
+
+class ToDoPage extends React.Component {
+
     render() {
 
-        console.log('JSX Rendering To-Do Form...');
-
-        // const postURL = `/${this.props.id}?_method=PUT`; // Syntax to use methodOverride since forms can't PUT
+        console.log('JSX Rendering To-Do...');
 
         return (
 
@@ -62,26 +109,7 @@ class ToDoForm extends React.Component {
 
                 <ToDoList entries = {this.props.entries} />
 
-
-                <div class="new-entry-form">
-
-                  <h3>To-Do List: New Entry</h3>
-
-                  <form method="POST" action="/">
-
-                  To-Do: <input type="text" name="toDoEntry" size="50" minLength="3" required /><br />
-
-                  Priority:{"\u00a0"}
-                  <input type="radio" class="priority-select" name="priority" value="high" />{"\u00a0"}High{"\u00a0"}
-                  <input type="radio" class="priority-select" name="priority" value="medium" />{"\u00a0"}Medium{"\u00a0"}
-                  <input type="radio" class="priority-select" name="priority" value="low" />{"\u00a0"}Low{"\u00a0"}
-                  <br />
-
-                  <input type="submit" value="Submit" />
-
-                  </form>
-
-                </div>
+                <ToDoForm />
 
             </body>
 
@@ -92,52 +120,11 @@ class ToDoForm extends React.Component {
 };
 
 
-module.exports = ToDoForm;
+module.exports = ToDoPage;
 
 
 
-// class Pokemon extends React.Component {
 
-//   render() {
-
-//     console.log('doggie');
-//     console.log("THIS PROPS:", this.props.abc );
-
-//     return (
-
-//       <div>
-
-//         <h1>{this.props.abc.name}</h1>
-
-//         <h1>{this.props.abc.email}</h1>
-
-//         <List items={listOfItems} />
-
-//       </div>
-
-//     );
-//   };
-// };
-
-// const listOfItems = [
-//   "apples",
-//   "bananas",
-//   "pineapple"
-// ];
-
-// class List extends React.Component {
-
-//     render() {
-
-//         let itemsElements = this.props.items.map (items => {return <li>{items}</li>});
-
-//         return (
-
-//           <ul>{itemsElements}</ul>
-
-//         );
-//     };
-// };
 
 
 

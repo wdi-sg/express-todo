@@ -1,25 +1,36 @@
 
 body {
 	margin: 5vw;
+	width: 75vw;
 }
 
 h1 {
-	color: black;
+	margin-bottom: 3vw;
 }
 
 h3 {
-	color: black;
+	margin-bottom: 3vw;
 }
 
-.container li.high {
+li.high {
 	color: red;
 	font-weight: 700;
 }
 
-.container li.low {
+li.low {
 	color: #A6A6A6;
+}
+
+.timestamp {
+	font-weight: 400;
+	color: #4184B4;
+}
+
+div.done {
+	text-decoration: line-through;
 }
 
 .new-entry-form {
 	margin-top: 10vw;
 }
+

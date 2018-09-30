@@ -15,11 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 const jsonfile = require('jsonfile');
+const moment = require('moment');
 
 const fileNew = 'listObject_new.json';
 const file = 'listObject.json';
 
 app.use(express.static('public'));
+
 
 
 app.get ('/', (request, response) => {
@@ -34,6 +36,7 @@ app.get ('/', (request, response) => {
 });
 
 
+
 app.post ('/', (request, response) => {
 
     jsonfile.readFile (file, (err, obj) => {
@@ -45,7 +48,7 @@ app.post ('/', (request, response) => {
             obj = {'entries': []}
         };
 
-        request.body['submissionTime'] = new Date(new Date());
+        request.body['submissionTime'] = moment();
 
         console.log("New entry: ", request.body);
 
@@ -63,11 +66,40 @@ app.post ('/', (request, response) => {
 
 
 
+app.put ('/', (request, response) => {
+
+    console.log("PUT request body: ", request.body);
+
+    jsonfile.readFile(file, (err, obj) => {
+
+        for (i in obj.entries) {
+
+            if (obj.entries[i].toDoEntry === request.body.buttonEntry) {
+
+                obj.entries[i].completed = 'done';
+
+            };
+        };
+
+        jsonfile.writeFile(file, obj, (err) => {
+
+            if (err) {console.log(err);};
+
+            return response.redirect('/');
+
+        });
+    });
+});
 
 
 
 
 app.listen(3001, () => console.log('~~~ Tuning in to the waves of port 3001 ~~~'));
+
+
+
+
+
 
 
 
