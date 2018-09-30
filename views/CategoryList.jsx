@@ -1,5 +1,5 @@
-import React from 'react';
-import CategoryItem from './CategoryItem';
+const React = require('react');
+const CategoryItem = require('./CategoryItem');
 
 class CategoryList extends React.Component {
   render() {
@@ -15,4 +15,4 @@ class CategoryList extends React.Component {
   }
 }
 
-export default CategoryList;
+module.exports = CategoryList;

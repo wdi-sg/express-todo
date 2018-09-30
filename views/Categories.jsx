@@ -1,6 +1,6 @@
-import React from 'react';
-import Layout from './Layout';
-import CategoryList from './CategoryList';
+const React = require('react');
+const Layout = require('./Layout');
+const CategoryList = require('./CategoryList');
 
 class Categories extends React.Component {
   render() {
@@ -17,4 +17,4 @@ class Categories extends React.Component {
   }
 }
 
-export default Categories;
+module.exports = Categories;

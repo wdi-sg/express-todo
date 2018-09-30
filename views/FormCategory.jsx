@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 class FormCategory extends React.Component {
   render() {
@@ -28,4 +28,4 @@ class FormCategory extends React.Component {
   }
 }
 
-export default FormCategory;
+module.exports = FormCategory;

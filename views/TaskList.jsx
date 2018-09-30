@@ -1,5 +1,5 @@
-import React from 'react';
-import TaskItem from './TaskItem';
+const React = require('react');
+const TaskItem = require('./TaskItem');
 
 class TaskList extends React.Component {
   render() {
@@ -28,4 +28,4 @@ class TaskList extends React.Component {
   }
 }
 
-export default TaskList;
+module.exports = TaskList;

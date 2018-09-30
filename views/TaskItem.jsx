@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 class TaskItem extends React.Component {
   render() {
@@ -15,4 +15,4 @@ class TaskItem extends React.Component {
   }
 }
 
-export default TaskItem;
+module.exports = TaskItem;

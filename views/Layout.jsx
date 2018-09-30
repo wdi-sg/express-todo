@@ -1,5 +1,5 @@
-import React from 'react';
-import Navigation from './Navigation';
+const React = require('react');
+const Navigation = require('./Navigation');
 
 class Layout extends React.Component {
   render() {
@@ -27,4 +27,4 @@ class Layout extends React.Component {
   }
 }
 
-export default Layout;
+module.exports = Layout;

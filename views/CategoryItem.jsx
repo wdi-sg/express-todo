@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 class CategoryItem extends React.Component {
   render() {
@@ -24,4 +24,4 @@ class CategoryItem extends React.Component {
   }
 }
 
-export default CategoryItem;
+module.exports = CategoryItem;

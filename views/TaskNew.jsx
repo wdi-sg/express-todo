@@ -1,7 +1,7 @@
-import React from 'react';
-import Layout from './Layout';
-import FormText from './FormText';
-import FormCategory from './FormCategory';
+const React = require('react');
+const Layout = require('./Layout');
+const FormText = require('./FormText');
+const FormCategory = require('./FormCategory');
 
 class TaskNew extends React.Component {
   render() {
@@ -29,4 +29,4 @@ class TaskNew extends React.Component {
   }
 }
 
-export default TaskNew;
+module.exports = TaskNew;

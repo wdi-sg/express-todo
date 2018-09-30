@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 class Navigation extends React.Component {
   render() {
@@ -18,4 +18,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+module.exports = Navigation;

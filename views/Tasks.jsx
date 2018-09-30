@@ -1,6 +1,6 @@
-import React from 'react';
-import Layout from './Layout';
-import TaskList from './TaskList';
+const React = require('react');
+const Layout = require('./Layout');
+const TaskList = require('./TaskList');
 
 class Tasks extends React.Component {
   render() {
@@ -39,4 +39,4 @@ class Tasks extends React.Component {
   }
 }
 
-export default Tasks;
+module.exports = Tasks;

@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 class FormText extends React.Component {
   render() {
@@ -21,4 +21,4 @@ class FormText extends React.Component {
   }
 }
 
-export default FormText;
+module.exports = FormText;

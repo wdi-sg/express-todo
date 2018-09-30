@@ -1,6 +1,6 @@
-import React from 'react';
-import Layout from './Layout';
-import FormText from './FormText';
+const React = require('react');
+const Layout = require('./Layout');
+const FormText = require('./FormText');
 
 class CategoryNew extends React.Component {
   render() {
@@ -21,4 +21,4 @@ class CategoryNew extends React.Component {
   }
 }
 
-export default CategoryNew;
+module.exports = CategoryNew;
