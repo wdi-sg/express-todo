@@ -4,13 +4,22 @@ body {
 }
 
 h1 {
-	color: red;
+	color: black;
 }
 
 h3 {
-	color: #8B0902;
+	color: black;
 }
 
-/*.priority-select {
-	margin: 0 2vw;
-}*/
+.container li.high {
+	color: red;
+	font-weight: 700;
+}
+
+.container li.low {
+	color: #A6A6A6;
+}
+
+.new-entry-form {
+	margin-top: 10vw;
+}

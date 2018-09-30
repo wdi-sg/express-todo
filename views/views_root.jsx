@@ -9,11 +9,26 @@ class ToDoList extends React.Component {
 
         console.log ("this.props: ", this.props);
 
-        let toDoElements = this.props.obj.entries.map (entry => {return <li>{entry.toDoEntry}</li>});
+        let toDoArray = this.props.entries
+
+        if (toDoArray) {toDoArray = toDoArray.map (e => {
+
+          return (
+
+            <li class={e.priority}>{e.toDoEntry}</li>
+
+          )});
+
+        } else {toDoArray = ""};
+
 
         return (
 
-          <ul>{toDoElements}</ul>
+          <div class="container">
+
+            {toDoArray}
+
+          </div>
 
         );
     };
@@ -43,26 +58,30 @@ class ToDoForm extends React.Component {
             <body>
 
 
-                <h1>To-Do List:</h1>
+                <h1>To-Do List</h1>
 
-                <ToDoList obj = {this.props} />
+                <ToDoList entries = {this.props.entries} />
 
 
-                <h3>To-Do List: New Entry</h3>
+                <div class="new-entry-form">
 
-                <form method="POST" action="/">
+                  <h3>To-Do List: New Entry</h3>
 
-                To-Do: <input type="text" name="toDoEntry" size="50" minLength="3" required /><br />
+                  <form method="POST" action="/">
 
-                Priority:{"\u00a0"}
-                <input type="radio" class="priority-select" name="priority" value="high" />{"\u00a0"}High{"\u00a0"}
-                <input type="radio" class="priority-select" name="priority" value="medium" />{"\u00a0"}Medium{"\u00a0"}
-                <input type="radio" class="priority-select" name="priority" value="low" />{"\u00a0"}Low{"\u00a0"}
-                <br />
+                  To-Do: <input type="text" name="toDoEntry" size="50" minLength="3" required /><br />
 
-                <input type="submit" value="Submit" />
+                  Priority:{"\u00a0"}
+                  <input type="radio" class="priority-select" name="priority" value="high" />{"\u00a0"}High{"\u00a0"}
+                  <input type="radio" class="priority-select" name="priority" value="medium" />{"\u00a0"}Medium{"\u00a0"}
+                  <input type="radio" class="priority-select" name="priority" value="low" />{"\u00a0"}Low{"\u00a0"}
+                  <br />
 
-                </form>
+                  <input type="submit" value="Submit" />
+
+                  </form>
+
+                </div>
 
             </body>
 
