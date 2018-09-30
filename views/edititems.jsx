@@ -6,28 +6,18 @@ class Edit extends React.Component {
 		var actionUrl = '/'+this.props.itemid+'?_method=PUT';
 		return(
 			<DefaultLayout title="Edit item" subtitle="EDIT ITEM">
-				<form method="POST" action={actionUrl}>
-					<div class="input-group">
-						<div class="input-group-prepend">
-    						<span class="input-group-text" id="">Item id</span>
-  						</div>
-						<input class="form-control" name="itemid" value={this.props.itemid} readOnly="readonly"/>
-						<div class="input-group-prepend">
-    						<span class="input-group-text" id="">Item</span>
-  						</div>
-						<input class="form-control" name="item" value={this.props.item}/>
-						<div class="input-group-prepend">
-    						<span class="input-group-text" id="">Location</span>
-  						</div>
-						<input class="form-control" name="location" value={this.props.location}/>
-						<div class="input-group-prepend">
-    						<span class="input-group-text" id="">Due date</span>
-  						</div>
-						<input class="form-control" name='due' value={this.props.due}/>
-						<br/>
-						<br/>
-						<input type="submit" value="Edit"/>
+				<form class="needs-validation" method="POST" action={actionUrl}>
+					<div class="form-row">
+						<div class="col-md-6 mb-4">
+							<label for="validationCustom01">Item Id</label>
+							<input class="form-control" id="validationCustom01" name="itemid" value={this.props.itemid} readOnly="readonly"/>
+						</div>
+						<div class="col-md-6 mb-4">
+    						<label for="validationCustom02">Item</label>
+							<input class="form-control" id="validationCustom02" name="item" value={this.props.item}/>
+						</div>
 					</div>
+					<button class="btn btn-primary btn-lg btn-block" type="submit">Edit</button>
 				</form>
 			</DefaultLayout>
 		)
