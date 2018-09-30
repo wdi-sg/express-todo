@@ -1,6 +1,7 @@
 const express = require('express');
 const jsonfile=require('jsonfile');
 const timestamp = require('time-stamp');
+const methodOverride = require("method-override");
 const nanoid = require('nanoid')
 const todoList = 'todolist.json'
 
@@ -23,6 +24,10 @@ app.use(express.urlencoded({
     extended:true
 }));
 
+app.use(methodOverride("_method"));
+// Telling Express Views to look into the public folder
+app.use("/public", express.static("public"));
+
 /*
 REACT
 */
@@ -37,13 +42,47 @@ app.set('view engine', 'jsx');
 /*
 ROUTES
 */
+//PUT edited 
+app.put('/post/:id',(req,res) =>{
+    jsonfile.readFile(todoList,(err,obj) =>{
+        
+        let listObject = obj['items']
 
-//GET Home
-app.get('/',(req,res)=>{
+        for(i in listObject){
+            if(listObject[i].id == req.params.id){
+                listObject[i] = req.body
+                newObject = {
+                    id : req.body.id,
+                    task : req.body.task
+                }
+                jsonfile.writeFile(todoList, newObject , err =>{
+                    if (err) return console.error(err)
+                    res.render("editedpost")
+                })
+            }
+        }       
+     })
+})
+
+//GET to Edit post
+app.get('/:id/edit' ,(req,res)=>{
     jsonfile.readFile(todoList,(err,obj)=>{
-        res.render('home');
-    });
-});
+        let listObject = obj['item']
+        let request = req.params.id
+
+        for(i in listObject){
+            if (listObject[i].id == request){
+                var foundRequest = listObject[i]
+            }
+        }
+        if (foundRequest){
+            res.render('edit', {item:foundRequest})
+        }
+        else{
+            res.render('invalid')
+        }
+        })
+})
 
 //POST List
 app.post('/list',(req,res) =>{
@@ -66,30 +105,13 @@ app.post('/list',(req,res) =>{
     })
 })
 
-//Get to Edit post
-app.get('/:id/edit' ,(req,res)=>{
+
+//GET Home
+app.get('/',(req,res)=>{
     jsonfile.readFile(todoList,(err,obj)=>{
-        let listObject = obj['item']
-        let request = req.params.id
-        console.log(req.params.id)
-
-        for(i in listObject){
-            if (listObject[i].id == request){
-                var foundRequest = listObject[i]
-            }
-        }
-        if (foundRequest){
-            res.render('edit', {item:foundRequest})
-        }
-        else{
-            res.render('invalid')
-        }
-        })
-})
-
-
-
-
+        res.render('home');
+    });
+});
 
 /*
 Listen using Nodemon
