@@ -10,22 +10,28 @@ class Tasks extends React.Component {
         return (
           <li className={classes} key={item.id}>
             <del>{item.value}</del>
-            <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
-              <input
-                className="btn btn-primary btn-sm float-right invisible"
-                type="submit"
-                value="Done"
-              />
-            </form>
+            <div className="btn-group-vertical float-right text-right">
+              <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
+                <input className="btn btn-link btn-sm invisible" type="submit" value="Done" />
+              </form>
+              <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
+                <input className="btn btn-link btn-sm text-danger" type="submit" value="Delete" />
+              </form>
+            </div>
           </li>
         );
       }
       return (
         <li className={classes} key={item.id}>
           {item.value}
-          <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
-            <input className="btn btn-primary btn-sm float-right" type="submit" value="Done" />
-          </form>
+          <div className="btn-group-vertical float-right">
+            <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
+              <input className="btn btn-sm btn-link" type="submit" value="Done" />
+            </form>
+            <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
+              <input className="btn btn-sm btn-link text-danger" type="submit" value="Delete" />
+            </form>
+          </div>
         </li>
       );
     });

@@ -33,7 +33,7 @@ app.put('/tasks/:id', (req, res) => {
     const list = obj.tasks;
     const param = req.params.id;
     // console.log(param);
-    list.forEach((element) => {
+    return list.forEach((element) => {
       const updated = element;
       if (element.id.toString() === param) {
         updated.complete = true;
