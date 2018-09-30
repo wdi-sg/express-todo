@@ -9,7 +9,7 @@ class DoneButton extends React.Component {
       <form method="POST" className = "list-form" action="/?_method=PUT">
         <input type="hidden" name="group" value={this.props.label} />
         <input type="hidden" name="item" value={this.props.text} />
-        <input type="submit" className="done-button" value="&#10003;" />
+        <input type="submit" className="btn done-button" value="&#10003;" />
       </form>
     )
   }
@@ -53,14 +53,14 @@ class SortBy extends React.Component {
   render () {
 
     return (
-      <div className="sortBy">
-        <form method="GET" action="/" className="sortBy">
+      <div className="sortby">
+        <form method="GET" action="/" className="sortby-form">
           <select name="sortBy">
             <option value="" selected>Sort by...</option>
             <option value="name">Name</option>
             <option value="time">Time Created</option>
           </select>
-          <input type="submit" value="Sort" />
+          <input type="submit" className="btn" value="Sort" />
         </form>
       </div>
     )

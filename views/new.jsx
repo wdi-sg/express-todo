@@ -24,14 +24,14 @@ class Home extends React.Component {
         <div className="new-form">
           <form method="POST" action="/new">
               <label>Group:</label>
-              <input name ="newGroup" className="text-input" />
+              <input name ="newGroup" className="text-input" autoComplete="off"/>
               <label> Leave blank for none, or select an existing group:</label>
               <select name="groupSelect">
                 <SelectGroups data={this.props.data} />
               </select>
               <label>Item:</label>
               <textarea rows="3" name="itemBody"></textarea>
-            <input type="submit" className="submit-button" value="Submit"/><br/>
+            <input type="submit" className="btn submit-button" value="Submit"/><br/>
             </form>
           </div>
       </Layout>

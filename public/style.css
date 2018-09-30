@@ -1,32 +1,31 @@
 body {
-  background-color: rgb(40,50,80);
-  font-family: "Arial", sans-serif;
-  min-width: 400px;
+  background-color: rgb(40,50,60);
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
 .container {
-  width: 90vw;
+  width: 85vw;
   background-color: white;
-  padding: 3vh 3vw;
+  padding: 1.5rem 2rem;
   border-radius: 7px;
-  margin: 2vh auto;
+  margin: 2rem auto;
 }
 
 
 @media screen and (min-width: 768px) {
   .container {
-    width: 75vw;
+    width: 65vw;
   }
 }
 
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 1200px) {
   .container {
-    width: 55vw;
+    width: 45vw;
   }
 }
 
 .row {
-  margin: 2vh auto;
+  margin: 1.5rem auto;
 }
 
 header {
@@ -34,98 +33,135 @@ header {
 }
 
 header h1 {
-  text-transform: uppercase;
+  font-family: "Comfortaa", serif;
   font-size: 50px;
   font-weight: bold;
 }
 
 nav {
-  color: rgb(80, 80, 80);
   text-decoration: none;
   display: flex;
-  margin: 1vh 0 1.5vh 0;
+  margin: 1rem 0 1rem 0;
   justify-content: flex-start;
 }
 
 .nav-links {
-  margin: 0 -0.5vw;
+  margin: 0 -0.5rem;
 }
 
 nav a {
-  color: rgb(80, 80, 80);
+  color: rgb(60, 75, 90);
   text-decoration: none;
-  margin: 0 0.5vw;
+  margin: 0 0.5rem;
   font-size: 16px;
 }
 
 .group {
   border-radius: 7px;
-  padding: 1vh 0.5vw;
-  margin: 1vh 1vw;
+  padding: 1rem 0.5rem;
+  margin: 1rem 1rem;
 }
 
 .grp-border {
-  background-color: rgb(245,245,245);
+  background-color: rgb(250,250,250);
   border: 1px solid grey;
 }
 
 .group p {
-  margin: 0.5vh 0 1vh 1vw;
+  margin: 0.5rem 0 1rem 1rem;
   font-weight: bold;
 }
 
 .group li {
-  margin: 0.5vh 0 0.5vh 1vw;
-  list-style: circle inside;
+  margin: 0.5rem 0 0.5rem 1rem;
+  list-style: square inside;
+  font-size: 14px;
 }
 
 .time {
-  color: grey;
+  color: rgb(160,160,160);
+  font-size: 10px;
 }
 
 .list-form {
   display: inline;
 }
 
+.btn:active {
+  outline: none;
+  border-radius: 3px;
+}
+
 .done-button {
   float: right;
   font-size: 10px;
-  padding: 1px 2px;
+  padding: 1px 3px;
   border: 1px solid grey;
   background-color: white;
+  border-radius: 3px;
+  margin: 0 1rem;
 }
 
 .done-item {
+  color: rgb(120,120,120);
   text-decoration: line-through;
-  color: grey;
+}
+
+select {
+  font-family: inherit;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
+.sortby {
+  margin: 2rem 1rem;
+  text-align: right;
+}
+
+.sortby-form {
+    margin: 2rem 1rem;
+}
+
+.sortby-form input {
+  margin: 0 -1rem 0 0.25rem;
+  border: none;
+  background-color: rgb(60,75,90);
+  padding: 3px 6px;
+  color: white;
+  border-radius: 3px;
+  font-family: inherit;
 }
 
 .new-form {
-  padding: 0.5vh 2vw;
+  padding: 0.5rem 1rem;
 }
 
 .new-form .text-input, .new-form select, .new-form textarea {
   display: block;
   width: 100%;
-  margin: 0.5vh 0 1vh 0;
+  margin: 0.5rem 0 0.75rem 0;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid grey;
+  border-radius: 3px;
+  font-family: inherit;
+  box-sizing: border-box;
 }
 
 .new-form label {
   display: block;
   width: 100%;
-  margin: 0.5vh 0;
+  margin: 0.5rem 0;
+  font-size: 14px;
 }
 
 .submit-button {
+  margin: 1rem 0 0 0 ;
   display: block;
-  padding: 2px 4px;
-}
-
-.sortBy {
-  margin: 2vh 1vw;
-  text-align: right;
-}
-
-.sortBy input {
-  margin: 0 0 0 3px;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  color: white;
+  background-color: rgb(60,75, 90);
+  border-radius: 3px;
+  border: none;
+  font-size: 16px;
 }
