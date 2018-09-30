@@ -75,12 +75,21 @@ class Home extends React.Component {
 
     let listGroups = data.map (group => {
 
-      return (
-        <div className="group" key={group.label}>
-          <p>{group.label}</p>
-          <ListItems items={group.items} group={group} />
-        </div>
-      )
+      if (group.label) {
+        return (
+          <div className="group grp-border" key={group.label}>
+            <p>{group.label}</p>
+            <ListItems items={group.items} group={group} />
+          </div>
+        )
+      } else {
+        return (
+            <div className="group" key={group.label}>
+              <ListItems items={group.items} group={group} />
+            </div>
+        )
+      }
+
     })
 
     return (

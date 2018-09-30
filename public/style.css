@@ -59,11 +59,14 @@ nav a {
 }
 
 .group {
-  border: 1px solid grey;
-  margin: 1vh 1vw;
-  background-color: rgb(245,245,245);
   border-radius: 7px;
   padding: 1vh 0.5vw;
+  margin: 1vh 1vw;
+}
+
+.grp-border {
+  background-color: rgb(245,245,245);
+  border: 1px solid grey;
 }
 
 .group p {
