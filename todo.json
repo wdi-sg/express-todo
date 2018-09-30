@@ -1,1 +1,30 @@
-{"categories":[{"id":"886efc30-c49b-11e8-a171-23560f5727d8","name":"Inbox"},{"id":"8ecaa3e0-c49b-11e8-a627-a77f764b5e4c","name":"Shopping"}],"tasks":[{"id":"92f16a30-c49b-11e8-8b52-db396b972eeb","name":"Do assignment","category":"886efc30-c49b-11e8-a171-23560f5727d8","status":"active","timeAdded":"2018/09/30 18:28:29","timeDone":"null"},{"id":"ca44c680-c49b-11e8-9b37-c7881a6a8f7d","name":"Buy ice cream","category":"8ecaa3e0-c49b-11e8-a627-a77f764b5e4c","status":"active","timeAdded":"2018/09/30 18:30:02","timeDone":"null"}]}
+{
+  "categories": [
+    {
+      "id": "886efc30-c49b-11e8-a171-23560f5727d8",
+      "name": "Inbox"
+    },
+    {
+      "id": "8ecaa3e0-c49b-11e8-a627-a77f764b5e4c",
+      "name": "Shopping"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "92f16a30-c49b-11e8-8b52-db396b972eeb",
+      "name": "Do assignment",
+      "category": "886efc30-c49b-11e8-a171-23560f5727d8",
+      "status": "done",
+      "timeAdded": "2018/09/30 18:28:29",
+      "timeDone": "2018/09/30 18:37:08"
+    },
+    {
+      "id": "ca44c680-c49b-11e8-9b37-c7881a6a8f7d",
+      "name": "Buy ice cream",
+      "category": "8ecaa3e0-c49b-11e8-a627-a77f764b5e4c",
+      "status": "active",
+      "timeAdded": "2018/09/30 18:30:02",
+      "timeDone": "null"
+    }
+  ]
+}

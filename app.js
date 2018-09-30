@@ -34,7 +34,6 @@ app = express();
 app.engine('jsx', reactEngine);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
-app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({
