@@ -46,6 +46,25 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
+app.delete('/tasks/:id', (req, res) => {
+  jsonfile.readFile(FILE, (readErr, obj) => {
+    if (readErr) return console.error(readErr);
+    const list = obj.tasks;
+    const param = req.params.id;
+    // console.log(param);
+    return list.forEach((element) => {
+      const updated = element;
+      if (element.id.toString() === param) {
+        updated.hidden = true;
+        jsonfile.writeFile(FILE, obj, (writeErr) => {
+          if (writeErr) console.error(writeErr);
+          res.redirect('/tasks');
+        });
+      }
+    });
+  });
+});
+
 //  NEW TASK WRITE
 app.post('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
