@@ -1,0 +1,48 @@
+{
+		"entries": [
+		{
+				"toDoEntry": "Homework",
+				"priority": "high",
+				"submissionTime": "2018-09-30T18:42:23.011Z"
+		},
+		{
+				"toDoEntry": "Clean my room",
+				"priority": "low",
+				"submissionTime": "2018-09-30T18:42:31.029Z"
+		},
+		{
+				"toDoEntry": "Return Sam's call",
+				"priority": "low",
+				"submissionTime": "2018-09-30T18:42:57.805Z"
+		},
+		{
+				"toDoEntry": "Dental Appointment",
+				"priority": "medium",
+				"submissionTime": "2018-09-30T18:43:06.501Z",
+				"completed": "done"
+		},
+		{
+				"toDoEntry": "Figure out how to format JS dates",
+				"priority": "low",
+				"submissionTime": "2018-09-30T18:43:22.510Z",
+				"completed": "done"
+		},
+		{
+				"toDoEntry": "CSS Buttons",
+				"priority": "high",
+				"submissionTime": "2018-09-30T18:43:46.347Z",
+				"completed": "done"
+		},
+		{
+				"toDoEntry": "Check if new CSS is working",
+				"priority": "medium",
+				"completed": "done",
+				"submissionTime": "2018-09-30T20:32:04.987Z"
+		},
+		{
+				"toDoEntry": "Cool, works",
+				"priority": "high",
+				"completed": "notdone",
+				"submissionTime": "2018-09-30T20:39:57.796Z"
+		}]
+}
