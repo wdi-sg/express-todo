@@ -5,13 +5,26 @@ var DefaultLayout = require('./layouts/default');
 class List extends React.Component {
 	render(){
 		var actionUrl = '/'+this.props.id+'/edit'
+		var actionUrl2 = '/'+this.props.id+'?_method=delete'
 		var lists = 
-		<li>
-			{this.props.id} {this.props.item} {this.props.location} {this.props.timerecorded} {this.props.due} 
-			<form method="GET" action={actionUrl}>
-			<input type="submit" value="edit"/>
-			</form> 
-		</li>
+		<tr>
+			<td>{this.props.id}</td>
+			<td>{this.props.item}</td> 
+			<td>{this.props.location}</td>
+			<td>{this.props.due}</td>
+			<td>{this.props.timerecorded}</td>
+			<td>
+				<form method="GET" action={actionUrl}>
+				<input type="submit" value="Edit"/>
+				</form> 
+			</td>
+			<td>
+				<form method="POST" action={actionUrl2}>
+					<input name="id" type="hidden" value={this.props.id}/>
+					<input type="submit" value="Delete"/>
+				</form>
+			</td>
+		</tr>
 		return ( lists )
 	}
 }
@@ -25,13 +38,24 @@ class Home extends React.Component {
 		});
 		return(
 			<DefaultLayout title="Home page" subtitle="HOME PAGE">
-				<form method="GET" action="/new">
-					<input type="submit" value="new"/>
-				</form>
+				<div class="new">
+					<form method="GET" action="/new">
+						<input type="submit" value="New"/>
+					</form>
+				</div>
 				<div>
-					<ul>
-						{itemLists}
-					</ul>
+					<table class="table">
+						<tr>
+							<th>Item Id</th>
+							<th>Item</th>
+							<th>Item location</th>
+							<th>Item due</th>
+							<th>Time of entry</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+							{itemLists}
+					</table>
 				</div>
 			</DefaultLayout>
 		)

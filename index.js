@@ -60,9 +60,34 @@ app.get('/home', (request, response)=>{
 	//console.log(itemsArray)
 })
 
+app.delete('/:id', (request, response)=>{
+	var id = request.params.id;
+	console.log(request.body);
+
+	jsonfile.readFile(FILE, (err, obj)=>{
+		var itemArray = obj["itemslist"];
+		for (let i=0; i<itemArray.length; i++){
+			if(itemArray[i].itemid == id){
+				itemArray.splice(i,1);
+				console.log(obj);
+				jsonfile.writeFile(FILE, obj, function(err){
+					if(err) console.log("error: "+err);
+
+					//response.send("deleted");
+					response.redirect('/home');
+				})
+				break;
+			}
+		}
+	})
+})
+
+
 app.put('/:id', (request, response)=>{
 	console.log(request.body);
 	var newObj = request.body;
+	const currentDate = new Date().toLocaleString();
+	newObj["timerecorded"] = currentDate;
 	newObj.itemid = parseInt(newObj.itemid);
 	jsonfile.readFile(FILE, (err, obj)=>{
 		var itemArray = obj["itemslist"];
@@ -72,7 +97,8 @@ app.put('/:id', (request, response)=>{
 
 				jsonfile.writeFile(FILE, obj, function(err){
 					if(err) console.log("error: "+err);
-					response.send("edited");
+					//response.send("edited");
+					response.redirect('/home');
 				})
 				break;
 			}
