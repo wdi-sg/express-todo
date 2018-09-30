@@ -102,6 +102,7 @@ app.put("/", (req, res) => {
 
   let group = req.body.group;
   let item = req.body.item;
+  console.log(req.body);
 
   jsonfile.readFile(FILE, (err, obj) => {
 
@@ -120,8 +121,8 @@ app.put("/", (req, res) => {
              }
              break;
           }
-          break;
         }
+        break;
       }
     }
 
