@@ -66,7 +66,7 @@ app.post("/posts", (req, res) => {
     });
   });
 });
-
+// Setting up a route to show the page to edit when click on edit button
 app.get("/posts/:id/edit", (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) return console.error(err);
@@ -74,22 +74,27 @@ app.get("/posts/:id/edit", (req, res) => {
     for (i in toDoListItems) {
       if (toDoListItems[i].id === req.params.id) {
         let postToEdit = toDoListItems[i];
+// render the editpost view with the post to edit as a prop.
         res.render("editpost", { post: postToEdit });
       }
     }
   });
 });
-
+// Action to take when submitting edit request
 app.put("/posts/:id", (req, res) => {
     jsonfile.readFile(FILE, (err, obj) => {
         if (err) return console.error(err)
         const toDoListItems = obj.toDoItems;
+// Loop through the array of items to find the matching one
         for (i in toDoListItems) {
             if (toDoListItems[i].id === req.params.id) {
+// Set the "todo" field to the new edited one from the Request Body
                 toDoListItems[i].todo = req.body.todo
+// Create a new object with the new "todo" list
                 newListObject = {
                     toDoItems: toDoListItems
                 }
+// Write the new object into the JSONfile
                 jsonfile.writeFile(FILE, newListObject, err => {
                     if (err) return console.error(err)
                     res.render("editedpost")

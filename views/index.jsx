@@ -6,6 +6,7 @@ import FormGroup from "./formgroup.jsx";
 
 class Index extends Component {
   render() {
+      console.log(this.props)
       const toDoListItemsProps = this.props.toDoItems
     return (
       <html lang="en">
@@ -14,7 +15,7 @@ class Index extends Component {
           <body>
             <h1>Welcome To The Do List</h1>
             <div className="col-md-4">
-              <FormGroup />
+              <FormGroup/>
 {/* Pass the props that I got from the object in jsonfile into the ListGroup */}
             <ListGroup items={toDoListItemsProps} />
             </div>
