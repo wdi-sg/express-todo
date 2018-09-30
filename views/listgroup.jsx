@@ -15,9 +15,9 @@ Unable to find any way to do this in Bootstrap
       return (
         <li className="list-group-item">
           <div className="container">
-            <span className="col-md-8 float-left">Item : {item.todo}</span>{" "}
-            <span className="col-md-4 float-right" id="date">
-              Date:
+            <span className="col-md-7 float-left">Item : {item.todo}</span>{" "}
+            <span className="col-md-5 float-right" id="date">
+              Date Added:
               {item.date}
             </span>
           </div>
@@ -25,20 +25,28 @@ Unable to find any way to do this in Bootstrap
             className="btn-group btn-group-sm float-left d-inline-block"
             role="group"
           >
-            <form>
-              <button type="button" className="btn btn-primary">
+            <label for="done-checkbox">Done: </label>
+            <input
+              type="checkbox"
+              name="done"
+              value="done"
+              id="done-checkbox"
+            />
+        <div className="form-row">
+        <form method="GET" action={"/posts/" + item.id + "/edit/"}>
+              <button type="submit" className="btn btn-primary" value={item.id}>
                 Edit
               </button>
             </form>
-            <form method="POST" action={"/posts/" + item.id + "/?_method=DELETE"}>
-              <button
-                type="submit"
-                className="btn btn-danger"
-                value={item.id}
-              >
+            <form
+              method="POST"
+              action={"/posts/" + item.id + "/?_method=DELETE"}
+            >
+              <button type="submit" className="btn btn-danger" value={item.id}>
                 Delete
               </button>
             </form>
+        </div>
           </div>
         </li>
       );

@@ -3,7 +3,7 @@ const jsonfile = require("jsonfile");
 const reactEngine = require("express-react-views").createEngine();
 const methodOverride = require("method-override");
 // Use Short Id Package to generate Unique ID for each post
-const shortid = require('shortid')
+const shortid = require("shortid");
 const FILE = "./data.json";
 
 /*
@@ -49,14 +49,14 @@ app.post("/posts", (req, res) => {
     if (err) return console.error(err);
     const toDoListItems = obj.toDoItems;
     let newItem = {
-// Use the shortid package to generate unique id for every post.
-        id: shortid.generate(),
-        key: shortid.generate(),
+      // Use the shortid package to generate unique id for every post.
+      id: shortid.generate(),
+      key: shortid.generate(),
       todo: req.body.newToDoItem,
       date: Intl.DateTimeFormat("en-GB").format(Date.now())
     };
     if (req.body.newToDoItem.length < 5) {
-        res.render("indexerror", obj)
+      res.render("indexerror", obj);
     } else {
       toDoListItems.push(newItem);
     }
@@ -67,23 +67,55 @@ app.post("/posts", (req, res) => {
   });
 });
 
-app.delete("/posts/:id", (req,res) => {
+app.get("/posts/:id/edit", (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) return console.error(err);
+    const toDoListItems = obj.toDoItems;
+    for (i in toDoListItems) {
+      if (toDoListItems[i].id === req.params.id) {
+        let postToEdit = toDoListItems[i];
+        res.render("editpost", { post: postToEdit });
+      }
+    }
+  });
+});
+
+app.put("/posts/:id", (req, res) => {
     jsonfile.readFile(FILE, (err, obj) => {
-        if (err) return console.err(err);
-        const toDoListObject = obj
-// Filter the Entire Array of Posts and return all Posts not matching with the delete post ID
-        const newListItems = toDoListObject["toDoItems"].filter(post => {
-            return post.id !== req.params.id
-        })
-        newListObject = {
-            toDoItems: newListItems
+        if (err) return console.error(err)
+        const toDoListItems = obj.toDoItems;
+        for (i in toDoListItems) {
+            if (toDoListItems[i].id === req.params.id) {
+                toDoListItems[i].todo = req.body.todo
+                newListObject = {
+                    toDoItems: toDoListItems
+                }
+                jsonfile.writeFile(FILE, newListObject, err => {
+                    if (err) return console.error(err)
+                    res.render("editedpost")
+                })
+            }
         }
-// Write the new object into the file
-        jsonfile.writeFile(FILE, newListObject, err => {
-            if (err) return console.error(err);
-            res.render("deletedpost")
-        })
     })
+})
+
+app.delete("/posts/:id", (req, res) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) return console.error(err);
+    const toDoListObject = obj;
+    // Filter the Entire Array of Posts and return all Posts not matching with the delete post ID
+    const newListItems = toDoListObject["toDoItems"].filter(post => {
+      return post.id !== req.params.id;
+    });
+    newListObject = {
+      toDoItems: newListItems
+    };
+    // Write the new object into the file
+    jsonfile.writeFile(FILE, newListObject, err => {
+      if (err) return console.error(err);
+      res.render("deletedpost");
+    });
+  });
 });
 
 app.get("/posts", (req, res) => {

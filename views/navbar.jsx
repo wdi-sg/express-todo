@@ -19,7 +19,7 @@ class Nav extends React.Component {
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
                 <script src="../index.js"></script>
                 <nav class="navbar navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand" href="#">The Extra To Do List</a>
                 </nav>
             </body>
         </html>)
