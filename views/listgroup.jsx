@@ -14,18 +14,31 @@ Unable to find any way to do this in Bootstrap
     const listItem = this.props.items.map(item => {
       return (
         <li className="list-group-item">
-          <span className="float-left">Item : {item.todo}</span>{" "}
-          <span className="float-right">
-            Date Added:
-            {item.date}
-          </span>
-          <div className="btn-group btn-group-sm float-right" role="group">
-            <button type="button" className="btn btn-danger">
-              Delete
-            </button>
-            <button type="button" className="btn btn-primary">
-              Edit
-            </button>
+          <div className="container">
+            <span className="col-md-8 float-left">Item : {item.todo}</span>{" "}
+            <span className="col-md-4 float-right" id="date">
+              Date:
+              {item.date}
+            </span>
+          </div>
+          <div
+            className="btn-group btn-group-sm float-left d-inline-block"
+            role="group"
+          >
+            <form>
+              <button type="button" className="btn btn-primary">
+                Edit
+              </button>
+            </form>
+            <form method="POST" action={"/posts/" + item.id + "/?_method=DELETE"}>
+              <button
+                type="submit"
+                className="btn btn-danger"
+                value={item.id}
+              >
+                Delete
+              </button>
+            </form>
           </div>
         </li>
       );

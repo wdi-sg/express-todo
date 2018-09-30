@@ -9,7 +9,7 @@ class FormGroup extends React.Component {
     };
 
     return (
-      <form method="POST" action="/newpost">
+      <form method="POST" action="/posts">
         <div className="form-group col-md-12 row">
           <label for="listItemEntry">Enter your To-Do Item</label>
         </div>

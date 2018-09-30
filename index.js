@@ -2,6 +2,8 @@ const express = require("express");
 const jsonfile = require("jsonfile");
 const reactEngine = require("express-react-views").createEngine();
 const methodOverride = require("method-override");
+// Use Short Id Package to generate Unique ID for each post
+const shortid = require('shortid')
 const FILE = "./data.json";
 
 /*
@@ -37,29 +39,55 @@ app.set("view engine", "jsx");
 app.get("/", (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) return console.error(err);
-// Pass the object from json.readfile to Index.jsx on render
+    // Pass the object from json.readfile to Index.jsx on render
     res.render("index", obj);
   });
 });
 
-app.post("/newpost", (req, res) => {
+app.post("/posts", (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) return console.error(err);
-    const toDoListItems = obj.toDoItems
+    const toDoListItems = obj.toDoItems;
     let newItem = {
-        "todo" : req.body.newToDoItem,
-        "date" : Intl.DateTimeFormat('en-GB').format(Date.now())
+// Use the shortid package to generate unique id for every post.
+        id: shortid.generate(),
+        key: shortid.generate(),
+      todo: req.body.newToDoItem,
+      date: Intl.DateTimeFormat("en-GB").format(Date.now())
+    };
+    if (req.body.newToDoItem.length < 5) {
+        res.render("indexerror", obj)
+    } else {
+      toDoListItems.push(newItem);
     }
-    toDoListItems.push(newItem);
-    return jsonfile.writeFile(FILE, obj, (err) => {
+    return jsonfile.writeFile(FILE, obj, err => {
       if (err) return console.error(err);
-      res.render("newpost", {newItem: newItem.todo});
+      res.render("newpost", { newItem: newItem.todo });
     });
   });
 });
 
-app.get("/newpost", (req,res) => {
-    res.render("newpost")
-})
+app.delete("/posts/:id", (req,res) => {
+    jsonfile.readFile(FILE, (err, obj) => {
+        if (err) return console.err(err);
+        const toDoListObject = obj
+// Filter the Entire Array of Posts and return all Posts not matching with the delete post ID
+        const newListItems = toDoListObject["toDoItems"].filter(post => {
+            return post.id !== req.params.id
+        })
+        newListObject = {
+            toDoItems: newListItems
+        }
+// Write the new object into the file
+        jsonfile.writeFile(FILE, newListObject, err => {
+            if (err) return console.error(err);
+            res.render("deletedpost")
+        })
+    })
+});
+
+app.get("/posts", (req, res) => {
+  res.render("newpost");
+});
 
 app.listen(3000, () => console.log("Listening on Port 3000"));
