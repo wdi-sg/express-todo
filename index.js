@@ -19,8 +19,47 @@ const jsonfile = require('jsonfile');
 const fileNew = 'listObject_new.json';
 const file = 'listObject.json';
 
+app.use(express.static('public'));
 
 
+app.get ('/', (request, response) => {
+
+    console.log("Requesting root...");
+
+    jsonfile.readFile(file, (err, obj) => {
+
+        return response.render('views_root', obj);
+
+    });
+});
+
+
+app.post ('/', (request, response) => {
+
+    jsonfile.readFile (file, (err, obj) => {
+
+        if (err) {console.log(err);};
+
+        if (Object.keys(obj).length === 0) {
+
+            obj = {'entries': []}
+        };
+
+        request.body['submissionTime'] = new Date(new Date());
+
+        console.log("New entry: ", request.body);
+
+        obj.entries.push (request.body);
+
+        jsonfile.writeFile (file, obj, (err) => {
+
+            if (err) {console.log(err);};
+
+            return response.redirect('/');
+
+        });
+    });
+});
 
 
 
