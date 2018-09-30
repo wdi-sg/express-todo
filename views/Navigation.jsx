@@ -3,7 +3,7 @@ import React from 'react';
 class Navigation extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <a href="/tasks" className="nav-link">Tasks</a>

@@ -15,7 +15,7 @@ class Layout extends React.Component {
         </head>
         <body>
           <Navigation />
-          <div className="container my-5">
+          <div className="container mt-5 py-5">
             {this.props.children}
           </div>
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossOrigin="anonymous"></script>

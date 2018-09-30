@@ -65,6 +65,7 @@ app.get('/tasks/new', (req, res) => {
   });
 });
 
+// /tasks?category={id}&sortby=[name|category|timeAdded]
 app.get('/tasks', (req, res) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) {
@@ -72,15 +73,30 @@ app.get('/tasks', (req, res) => {
     }
 
     const sortby = req.query.sortby;
+    const category = parseInt(req.query.category);
+    let tasks;
+
+    if (category) {
+      tasks = obj.tasks.filter(task => task.category === category);
+    } else {
+      tasks = obj.tasks;
+    }
+
     if (sortby) {
       if (sortby === 'category') {
-        obj.tasks.sort((a, b) => a[sortby] - b[sortby]);
+        tasks.sort((a, b) => a[sortby] - b[sortby]);
       } else {
-        obj.tasks.sort((a, b) => a[sortby].localeCompare(b[sortby]));
+        tasks.sort((a, b) => a[sortby].localeCompare(b[sortby]));
       }
     }
 
-    res.render('Tasks', obj);
+    const info = {
+      tasks: tasks,
+      categories: obj.categories,
+      queryCategory: req.query.category
+    };
+
+    res.render('Tasks', info);
   });
 });
 

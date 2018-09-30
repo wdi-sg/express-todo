@@ -4,6 +4,16 @@ import TaskList from './TaskList';
 
 class Tasks extends React.Component {
   render() {
+    let nameUrl;
+    let dateUrl;
+    if (this.props.queryCategory) {
+      nameUrl = `/tasks?category=${this.props.queryCategory}&sortby=name`;
+      dateUrl = `/tasks?category=${this.props.queryCategory}&sortby=timeAdded`;
+    } else {
+      nameUrl = '/tasks?sortby=name';
+      dateUrl = '/tasks?sortby=timeAdded';
+    }
+
     return (
       <Layout>
         <div className="dropdown text-right mb-3">
@@ -19,9 +29,8 @@ class Tasks extends React.Component {
             Sort by...
           </a>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a href="/tasks?sortby=name" className="dropdown-item">Name</a>
-            <a href="/tasks?sortby=timeAdded" className="dropdown-item">Date</a>
-            <a href="/tasks?sortby=category" className="dropdown-item">Category</a>
+            <a href={nameUrl} className="dropdown-item">Name</a>
+            <a href={dateUrl} className="dropdown-item">Date</a>
           </div>
         </div>
         <TaskList todo={this.props} />
