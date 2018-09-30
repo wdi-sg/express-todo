@@ -5,10 +5,12 @@ class Action extends React.Component {
 
     render () {
 
+        let seperate = this.props.needToDo.split('~');
+
         return (
 
 
-            <li>{this.props.needToDo}</li>
+            <li>{seperate[0]}</li>
 
     )};
 
@@ -34,13 +36,14 @@ class List extends React.Component {
 
         return(
 
-            <a href={thisPage}>
+            <a className="anchor-container" href={thisPage}>
             <div className="list-container">
                 <h2>{this.props.listIndex.title}</h2>
                 <ol>
                     {actions}
                 </ol>
             </div>
+            <p className="date">{this.props.listIndex.dateCreated}</p>
             </a>
     )};
 };

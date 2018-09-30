@@ -7,9 +7,9 @@ class Options extends React.Component {
 
         return(
 
-                <li>
+                <div className="checkbox">
                     <input type="checkbox" name="delete" value={this.props.delete}/> {this.props.delete}
-                </li>
+                </div>
 
     )};
 };
@@ -29,12 +29,12 @@ class Delete extends React.Component {
 
             <Default title="Delete">
                 <div className="wrapper">
+                    <h1>Select The List/(s) To Delete</h1>
                     <form method="POST" action={deleteUrl}>
-                        <h1>Select The List/(s) To Delete</h1>
-                        <ol>
-                            {options}
-                        </ol>
-                        <input type="Submit" value="Delete"/>
+                        {options}
+                        <div className="button">
+                            <input className="create" type="Submit" value="Delete"/>
+                        </div>
                     </form>
                 </div>
             </Default>

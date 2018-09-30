@@ -129,25 +129,47 @@ app.put('/:name', (request, response) => {
 
         if (editCurrent.done !== undefined) {
 
-            listToEdit.toBeDone = listToEdit.toBeDone.map((element) => {
+                listToEdit.toBeDone = listToEdit.toBeDone.map((element) => {
 
-                if (editCurrent.done.includes(element)) {
+                    if (Array.isArray(editCurrent.done)) {
 
-                    return element + " \u2713";
+                        if (editCurrent.done.includes(element)) {
 
-                } else {
+                            return element + " \u2713" + "~ Done on: " + request.body.dateUpdated;
 
-                    return element;
-                }
+                        } else {
 
-            });
+                            return element;
+                        }
+
+                    } else {
+
+                        if (editCurrent.done === element) {
+
+                            return element + " \u2713" + "~ Done on: " + request.body.dateUpdated;
+
+                        } else {
+
+                            return element
+                        }
+
+                    }
+
+                });
 
         }
 
         if (editCurrent.newtask !== '') {
 
             let newTask = editCurrent.newtask.split('.');
-            newTask.forEach((element) => {
+
+            let filteredNewTask = newTask.filter((element) => {
+
+                return element !== '';
+
+            });
+
+            filteredNewTask.forEach((element) => {
                 listToEdit.toBeDone.push(element);
             });
         }
@@ -189,9 +211,14 @@ app.post('/', (request, response) => {
     jsonfile.readFile(FILE, (err, obj) => {
 
         obj['todo'].push(request.body);
-
         let listOfThings = obj['todo'][request.body.id]['toBeDone'].split('.');
-        obj['todo'][request.body.id]['toBeDone'] = listOfThings;
+
+        let filteredList = listOfThings.filter((element) => {
+
+            return element !== '';
+        });
+
+        obj['todo'][request.body.id]['toBeDone'] = filteredList;
 
         jsonfile.writeFile(FILE, obj, (err) => {
             console.log(err);

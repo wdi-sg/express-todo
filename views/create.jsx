@@ -7,10 +7,12 @@ class Create extends React.Component {
 
         let index = this.props.list.length;
 
+        let date = new Date();
+
         return (
 
             <Default title="Create">
-                <div className="wrapper">
+                <div className="form-wrapper">
                     <h1>Create New List</h1>
                     <form method="POST" action="/">
                         <input type="hidden" name="id" value={index}/>
@@ -19,7 +21,8 @@ class Create extends React.Component {
                         <br/>
                         <p className="header">Enter List:</p>
                         <textarea className="input" name="toBeDone" placeholder="Enter the list of things/actions seperating each list item with a period" required></textarea>
-                        <div className="button">
+                        <input type="hidden" name="dateCreated" value={date}/>
+                        <div className="form-button">
                             <input className="create" type="submit" value="Submit"/>
                         </div>
                     </form>
