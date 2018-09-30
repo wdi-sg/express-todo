@@ -32,11 +32,12 @@ app.put('/tasks/:id', (req, res) => {
     if (readErr) return console.error(readErr);
     const list = obj.tasks;
     const param = req.params.id;
-    // console.log(param);
+    const currentDate = new Date().toLocaleString();
     return list.forEach((element) => {
       const updated = element;
       if (element.id.toString() === param) {
         updated.complete = true;
+        updated.completed = currentDate;
         jsonfile.writeFile(FILE, obj, (writeErr) => {
           if (writeErr) console.error(writeErr);
           res.redirect('/tasks');
@@ -46,6 +47,7 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
+// DELETE TASK ROUTE
 app.delete('/tasks/:id', (req, res) => {
   jsonfile.readFile(FILE, (readErr, obj) => {
     if (readErr) return console.error(readErr);
@@ -74,7 +76,8 @@ app.post('/tasks', (req, res) => {
     const currentDate = new Date().toLocaleString();
     const newTask = {
       id: list.length + 1,
-      time: currentDate,
+      added: currentDate,
+      completed: '',
       value: param,
       complete: false,
       hidden: false,
