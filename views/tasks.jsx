@@ -5,7 +5,7 @@ class Tasks extends React.Component {
   render() {
     const actionUrl = '/tasks/';
     const classes = 'list-group-item';
-    const buttonClasses = 'btn btn-link btn-sm';
+    const buttonClasses = 'btn btn-link btn-sm font-weight-bold text-right';
     const items = this.props.tasks.map((item) => {
       if (item.hidden) {
         return null;
@@ -13,8 +13,12 @@ class Tasks extends React.Component {
       if (item.complete) {
         return (
           <li className={classes} key={item.id}>
-            <del>{item.value}</del>
-            <div className="btn-group-vertical float-right text-right">
+            <del className="text-muted">
+              {item.added}
+              <br />
+              <strong>{item.value}</strong>
+            </del>
+            <div className="btn-group-vertical float-right">
               <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
                 <input className={`${buttonClasses} invisible`} type="submit" value="Done" />
               </form>
@@ -27,7 +31,9 @@ class Tasks extends React.Component {
       }
       return (
         <li className={classes} key={item.id}>
-          {item.value}
+          {item.added}
+          <br />
+          <strong>{item.value}</strong>
           <div className="btn-group-vertical float-right">
             <form action={`${actionUrl + item.id}?_method=PUT`} method="post">
               <input className={buttonClasses} type="submit" value="Done" />

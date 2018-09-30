@@ -24,7 +24,9 @@ class DefaultLayout extends React.Component {
               <span className="navbar-text">{this.props.subtitle}</span>
             </nav>
           </header>
-          <div className="container w-50 mx-auto mt-5">{this.props.children}</div>
+          <div className="container mx-auto mt-5">
+            <div className="col-md">{this.props.children}</div>
+          </div>
         </body>
       </html>
     );
