@@ -1,15 +1,11 @@
 var React = require('react');
 
-let message = "test";
 
-class Default extends React.Component {
+class TaskList extends React.Component {
   render() {
-    return (
-    <div>
-        <h1>{ message }</h1>
-    </div>
-    );
-  }
-};
+    console.log("SINGLE COMPONENT:", this.props.list)
+    }
+}
 
-module.exports = Default;
+
+module.exports = TaskList;
