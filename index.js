@@ -19,6 +19,7 @@ app.set('view engine', 'jsx');
 
 const FILE = 'data.json';
 
+// create new item
 app.post('/new', (req, res) => {
 
   let newGroup = req.body.newGroup;
@@ -33,7 +34,8 @@ app.post('/new', (req, res) => {
 
     let newItem = {};
     newItem["text"] = itemBody;
-    newItem["time"] = date.getHours() + ":" + date.getMinutes();
+    newItem["time"] = date.getHours() + ":" +
+    (date.getMinutes()<10?'0':'') + date.getMinutes() ;
     newItem["completion"] = 0;
 
 
@@ -95,6 +97,7 @@ app.get("/new", (req, res) => {
   })
 })
 
+// mark + delete item
 app.put("/", (req, res) => {
 
   let group = req.body.group;

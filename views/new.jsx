@@ -21,19 +21,17 @@ class Home extends React.Component {
 
     return (
       <Layout title="Add Item">
-        <div className="col">
+        <div className="new-form">
           <form method="POST" action="/new">
-            <div className="form-group">
               <label>Group:</label>
-              <input className="form-control" name ="newGroup" />
-              <small className="form-text text-muted">Leave blank for none, or select an existing group:</small>
-              <select className="form-control" name="groupSelect">
+              <input name ="newGroup" className="text-input" />
+              <label> Leave blank for none, or select an existing group:</label>
+              <select name="groupSelect">
                 <SelectGroups data={this.props.data} />
               </select>
               <label>Item:</label>
-              <textarea className="form-control"rows="3" name="itemBody"></textarea>
-            </div>
-            <input type="submit" className="btn btn-success" value="Submit"/><br/>
+              <textarea rows="3" name="itemBody"></textarea>
+            <input type="submit" className="submit-button" value="Submit"/><br/>
             </form>
           </div>
       </Layout>

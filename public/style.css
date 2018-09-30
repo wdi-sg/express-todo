@@ -1,34 +1,128 @@
 body {
-  background-color: green;
+  background-color: rgb(40,50,80);
+  font-family: "Arial", sans-serif;
+  min-width: 400px;
 }
 
 .container {
-  width: 80vw;
+  width: 90vw;
   background-color: white;
   padding: 3vh 3vw;
   border-radius: 7px;
   margin: 2vh auto;
 }
 
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 75vw;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .container {
+    width: 55vw;
+  }
+}
+
 .row {
   margin: 2vh auto;
 }
 
+header {
+  border-bottom: 1px solid grey;
+}
+
+header h1 {
+  text-transform: uppercase;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+nav {
+  color: rgb(80, 80, 80);
+  text-decoration: none;
+  display: flex;
+  margin: 1vh 0 1.5vh 0;
+  justify-content: flex-start;
+}
+
+.nav-links {
+  margin: 0 -0.5vw;
+}
+
+nav a {
+  color: rgb(80, 80, 80);
+  text-decoration: none;
+  margin: 0 0.5vw;
+  font-size: 16px;
+}
+
 .group {
-  background-color: rgb(0,0,0,0.1);
   border: 1px solid grey;
+  margin: 1vh 1vw;
+  background-color: rgb(245,245,245);
   border-radius: 7px;
+  padding: 1vh 0.5vw;
 }
 
-.date-text {
-  float: right;
+.group p {
+  margin: 0.5vh 0 1vh 1vw;
+  font-weight: bold;
 }
 
-.hide-button {
+.group li {
+  margin: 0.5vh 0 0.5vh 1vw;
+  list-style: circle inside;
+}
+
+.time {
+  color: grey;
+}
+
+.list-form {
+  display: inline;
+}
+
+.done-button {
   float: right;
+  font-size: 10px;
+  padding: 1px 2px;
+  border: 1px solid grey;
+  background-color: white;
 }
 
 .done-item {
   text-decoration: line-through;
   color: grey;
+}
+
+.new-form {
+  padding: 0.5vh 2vw;
+}
+
+.new-form .text-input, .new-form select, .new-form textarea {
+  display: block;
+  width: 100%;
+  margin: 0.5vh 0 1vh 0;
+}
+
+.new-form label {
+  display: block;
+  width: 100%;
+  margin: 0.5vh 0;
+}
+
+.submit-button {
+  display: block;
+  padding: 2px 4px;
+}
+
+.sortBy {
+  margin: 2vh 1vw;
+  text-align: right;
+}
+
+.sortBy input {
+  margin: 0 0 0 3px;
 }

@@ -1,6 +1,20 @@
 var React = require('react');
 var Layout = require('./layout/layout');
 
+class DoneButton extends React.Component {
+
+  render () {
+
+    return (
+      <form method="POST" className = "list-form" action="/?_method=PUT">
+        <input type="hidden" name="group" value={this.props.label} />
+        <input type="hidden" name="item" value={this.props.text} />
+        <input type="submit" className="done-button" value="&#10003;" />
+      </form>
+    )
+  }
+}
+
 class ListItems extends React.Component {
 
   render () {
@@ -10,23 +24,16 @@ class ListItems extends React.Component {
       if (item.completion > 0) {
         return (
           <li key={item.text}>
-            <span className="done-item">{item.text}</span> &ndash; <span className="text-muted">{item.time}</span>
-            <form method="POST" action="/?_method=PUT">
-              <input type="hidden" name="group" value={this.props.group.label} />
-              <input type="hidden" name="item" value={item.text} />
-              <input type="submit" className="btn btn-sm date-text" value="Remove" />
-            </form>
+            <span className="done-item">{item.text}</span> <span className="time">&ndash;  {item.time}</span>
+            <DoneButton label={this.props.group.label} text={item.text} />
+
           </li>
         )
       } else {
         return (
           <li key={item.text}>
-            {item.text} &ndash; <span className="text-muted">{item.time}</span>
-            <form method="POST" action="/?_method=PUT">
-              <input type="hidden" name="group" value={this.props.group.label} />
-              <input type="hidden" name="item" value={item.text} />
-              <input type="submit" className="btn btn-sm date-text" value="Done" />
-            </form>
+            {item.text} <span className="time">&ndash; {item.time}</span>
+            <DoneButton label={this.props.group.label} text={item.text} />
         </li>
         )
       }
@@ -46,14 +53,16 @@ class SortBy extends React.Component {
   render () {
 
     return (
-      <form method="GET" action="/">
-        <select name="sortBy">
-          <option value="" selected>Sort by...</option>
-          <option value="name">Name</option>
-          <option value="time">Time Created</option>
-        </select>
-        <input type="submit" className="btn btn-sm" value="Submit" />
-      </form>
+      <div className="sortBy">
+        <form method="GET" action="/" className="sortBy">
+          <select name="sortBy">
+            <option value="" selected>Sort by...</option>
+            <option value="name">Name</option>
+            <option value="time">Time Created</option>
+          </select>
+          <input type="submit" value="Sort" />
+        </form>
+      </div>
     )
   }
 }
@@ -62,10 +71,12 @@ class Home extends React.Component {
 
   render () {
 
-    let listGroups = this.props.data.map (group => {
+    let data = this.props.data;
+
+    let listGroups = data.map (group => {
 
       return (
-        <div className="col-md group" key={group.label}>
+        <div className="group" key={group.label}>
           <p>{group.label}</p>
           <ListItems items={group.items} group={group} />
         </div>
