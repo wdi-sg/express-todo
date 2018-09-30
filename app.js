@@ -26,7 +26,7 @@ const getDateTime = () => {
   let sec = date.getSeconds();
   sec = (sec < 10 ? '0' : '') + sec;
 
-  return year + '/' + month + '/' + day + ' ' + hour + ':' + min + ':' + sec;
+  return `${year}/${month}/${day} ${hour}:${min}:${sec}`;
 }
 
 app = express();

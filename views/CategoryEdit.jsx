@@ -4,7 +4,8 @@ import FormText from './FormText';
 
 class CategoryEdit extends React.Component {
   render() {
-    const actionUrl = '/categories/' + this.props.category.id + '?_method=PUT';
+    const actionUrl = `/categories/${this.props.category.id}?_method=PUT`;
+
     return (
       <Layout>
         <form method="POST" action={actionUrl}>

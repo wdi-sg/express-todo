@@ -5,8 +5,8 @@ import FormCategory from './FormCategory';
 
 class TaskEdit extends React.Component {
   render() {
-    const updateUrl = '/tasks/' + this.props.task.id + '?_method=PUT';
-    const deleteUrl = '/tasks/' + this.props.task.id + '?_method=DELETE';
+    const updateUrl = `/tasks/${this.props.task.id}?_method=PUT`;
+    const deleteUrl = `/tasks/${this.props.task.id}?_method=DELETE`;
     const toggleText = this.props.task.status === 'active' ? 'Done' : 'Undo';
 
     return (

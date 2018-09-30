@@ -2,8 +2,9 @@ import React from 'react';
 
 class CategoryItem extends React.Component {
   render() {
-    const filterUrl = '/tasks?category=' + this.props.category.id;
-    const editUrl = '/categories/' + this.props.category.id + '/edit';
+    const filterUrl = `/tasks?category=${this.props.category.id}`;
+    const editUrl = `/categories/${this.props.category.id}/edit`;
+
     return (
       <div className="container">
         <div className="row">
