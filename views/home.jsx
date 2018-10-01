@@ -50,7 +50,7 @@ class Home extends React.Component {
 							<tr>
 								<th>Item Id</th>
 								<th>Item</th>
-								<th>Time of entry</th>
+								<th>Time of Entry</th>
 								<th>Edit</th>
 								<th>Delete</th>
 								<th>Completed</th>

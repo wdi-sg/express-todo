@@ -22,25 +22,6 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
 
-// var todolist = {
-// 	lists: [
-// 	{
-// 	    "itemid": 1,
-// 	    "item": "eat",
-// 	    "location": "home",
-// 	    "timerecorded": "14:00",
-// 	    "due": "12-01-19"
-// 	},
-// 	{
-// 	    "itemid": 2,
-// 	    "item": "work",
-// 	    "location": "work",
-// 	    "timerecorded": "15:00",
-// 	    "due": "12-02-19",
-// 	}
-// 	]
-// };
-
 var itemsArray;
 
 const FILE = 'todolist.json';
