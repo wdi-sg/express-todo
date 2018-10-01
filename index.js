@@ -62,7 +62,7 @@ app.post('/shoppinglist', (req, res) => {
     //const obj.items = [];
     const itemList = obj.items;
 
-    //You need this f*cking lines to prevent overwrite ↓
+    // *******You need these to prevent overwrite ↓
     const newItem = {
         id: itemList.length + 1,
         description: req.body.description,
@@ -71,11 +71,12 @@ app.post('/shoppinglist', (req, res) => {
     };
 
     console.log("req.body: ", newItem);
-    // You need this f*cking lines to prevent overwrite ↑
-    obj.items.push(newItem);
+    // *******You need these to prevent overwrite ↑
+    //obj.items.push(newItem);
+    obj['items'].push(newItem);
 
-
-    jsonfile.writeFile(FILE, newItem, (err) => {
+    //obj writes the whole thing and newItem only the item
+    jsonfile.writeFile(FILE, obj, (err) => {
       if(err){
         console.log('error:', err);
       }
