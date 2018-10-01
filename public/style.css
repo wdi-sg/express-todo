@@ -1,0 +1,22 @@
+table {
+	margin: 0 auto;
+}
+
+th {
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+.new {
+	text-align: center;
+	margin: 20px auto;
+}
