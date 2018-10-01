@@ -45,20 +45,21 @@ ROUTES
 //PUT edited 
 app.put('/post/:id',(req,res) =>{
     jsonfile.readFile(todoList,(err,obj) =>{
-        
-        let listObject = obj['items']
 
-        for(i in listObject){
+        let listObject = obj['item']
+        for (var i = 0;i<listObject.length;i++) {
             if(listObject[i].id == req.params.id){
-                listObject[i] = req.body
                 newObject = {
                     id : req.body.id,
-                    task : req.body.task
+                    task : req.body.task,
+                    dateTime: timestamp.utc('mm:ss YYYY/MM/DD/')
                 }
-                jsonfile.writeFile(todoList, newObject , err =>{
+                listObject[i] = newObject;
+                jsonfile.writeFile(todoList, obj , err =>{
                     if (err) return console.error(err)
-                    res.render("editedpost")
                 })
+
+                res.render("editedpost");
             }
         }       
      })
