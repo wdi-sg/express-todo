@@ -7,10 +7,19 @@ class Todolist extends React.Component {
     //what it does is to convert each item in the array into a list item
     var taskArray = this.props.object
     let itemsElements = taskArray.map(item => {
-                              return <li>Task: {item.taskname}
-                              // <form method= "POST" action="/todolist"> <input type = "submit" value= "Mark as done"></input> </form>
-                              </li>
-                        });
+            let actionPath = "/todolist/" + item.id + "?_method=PUT"
+            if (item.done) {
+                return <li key={item.id}>Task: <del>{item.taskname}</del> </li>
+            } else {
+            //map is an iterator, goes through an array, and returns you a new array
+            //you cannot have sibling elements without a parent elements
+            return <li key={item.id}>Task: {item.taskname}
+            <div> <form method= "POST" action={actionPath}> <input type = "submit" value= "done"></input> </form> </div>
+            </li>
+            //check done property, if done then render
+            }
+            });
+
         return (
           <ul>
             {itemsElements}
@@ -20,9 +29,4 @@ class Todolist extends React.Component {
 }
 
 module.exports = Todolist;
-
-
-
-
-
 

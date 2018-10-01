@@ -1,4 +1,5 @@
-//further
+//npm init -y : to indicate Yes for everything
+//Further
 //Be able to permanently delete an item
 //Add "buckets" or categories that you can put each of your todo items into.
 //Add the ability to name each bucket/category.
@@ -8,7 +9,7 @@ const express = require('express');
 const app = express();
 
 const jsonfile = require('jsonfile');
-const FILE = 'todo.json';
+const FILE = './todo.json';
 
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
@@ -31,7 +32,7 @@ app.set('view engine', 'jsx');
 //Display html form for user to add task
 app.get('/', (request, response) => {
     //render the todo.jsx file
-        response.render('todo');
+    response.render('todo');
 })
 
 //read json file, then update json file after user input
@@ -40,32 +41,35 @@ app.post('/todolist', function(request, response) {
     //F1: Add a recording of the time that you put the item in your todo list.
     const currentDate = new Date().toLocaleString();
     var errorMessage = false;
-    // var idArray = [];
-    // var idNumber = 1 + parseInt(idArray.length);
-    var taskObject = {
-        id: '', //find a way to generate a unique id
-        taskname: request.body.task,
-        timeadded: currentDate,
-        timecompleted: ''
-    };
 
     //read jsonfile and retrieve existing info
     jsonfile.readFile(FILE, (error, object) => {
         var array = object.task;
+        var taskObject = {
+            id: object.lastIndex + 1, //find a way to generate a unique id
+            taskname: request.body.task,
+            timeadded: currentDate,
+            done: false,
+            timecompleted: ''
+        };
 
         //create an object, and push the object into the json array
-        if (taskObject.taskname == '') {
+        if (error) {
+            response.send('ERROR READING FILE')
+        } else if
+            (taskObject.taskname == '') {
             var errorMessage = true;
         } else {
             array.push(taskObject);
+            object.lastIndex += 1;
         }
-        // idArray.push(taskObject);
 
         // save the request.body
         jsonfile.writeFile(FILE, object, (err) => {
             console.error(err);
         })
     })
+
     response.redirect("/todolist");
 })
 
@@ -73,11 +77,35 @@ app.post('/todolist', function(request, response) {
 app.get('/todolist', (request, response) => {
 
     jsonfile.readFile(FILE, (error, object) => {
-    var array = object.task;
-    //render the dashboard
-    response.render('dashboard', { object: array });
+        var array = object.task;
+        //render the dashboard
+        response.render('dashboard', { object: array });
     })
 })
+
+//update the todo list
+app.put('/todolist/:id', function(request, response) {
+
+    //read jsonfile and retrieve existing info
+    jsonfile.readFile(FILE, (error, object) => {
+        // console.log("-------------------------------")
+        // console.log(request.params.id);
+        let idNumber = request.params.id;
+        var array = object.task;
+        for (i in array) {
+            if (array[i].id == idNumber) {
+                array[i].done = true;
+            }
+        }
+        // save the request.body
+        jsonfile.writeFile(FILE, object, (err) => {
+            console.error(err);
+        })
+    })
+
+    response.redirect("/todolist");
+})
+
 
 //ready server for get requests
 app.listen(3000, () => console.log('~~~ Tuning in to the waves of port 3000 ~~~'));
